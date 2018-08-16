@@ -1,0 +1,1697 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
+	<META NAME="AUTHOR" CONTENT="BONNOT Fabrice">
+	<META NAME="CREATED" CONTENT="20180703;73100000000000">
+	<META NAME="CHANGEDBY" CONTENT="BONNOT Fabrice">
+	<META NAME="CHANGED" CONTENT="20180810;120400000000000">
+	<META NAME="AppVersion" CONTENT="16.0000">
+	<META NAME="Company" CONTENT="SopraSteria">
+	<META NAME="DocSecurity" CONTENT="0">
+	<META NAME="HyperlinksChanged" CONTENT="false">
+	<META NAME="LinksUpToDate" CONTENT="false">
+	<META NAME="ScaleCrop" CONTENT="false">
+	<META NAME="ShareDoc" CONTENT="false">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.98in }
+		P { margin-bottom: 0.08in; direction: ltr; line-height: 100%; widows: 2; orphans: 2 }
+		H1 { margin-bottom: 0in; direction: ltr; color: #2e74b5; line-height: 100%; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H1.western { font-family: "Calibri Light", serif; font-size: 16pt; font-weight: normal }
+		H1.cjk { font-size: 16pt; font-weight: normal }
+		H1.ctl { font-family: ; font-size: 16pt; font-weight: normal }
+		H2 { margin-top: 0.03in; margin-bottom: 0in; direction: ltr; color: #2e74b5; line-height: 100%; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H2.western { font-family: "Calibri Light", serif; font-size: 13pt; font-weight: normal }
+		H2.cjk { font-family: "Arial"; font-size: 13pt; font-weight: normal }
+		H2.ctl { font-family: ; font-size: 13pt; font-weight: normal }
+		A:link { color: #0563c1; so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="fr-FR" LINK="#0563c1" DIR="LTR">
+<OL>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">A savoir</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><U>Avant de débuter</U></P>
+<P STYLE="margin-bottom: 0in">Légende&nbsp;:</P>
+<P STYLE="margin-bottom: 0in">	[entre crochets] = argument à
+personnaliser</P>
+<P STYLE="margin-bottom: 0in">	<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>Police_console_verte</FONT></FONT></FONT><FONT COLOR="#00b050">
+</FONT>= commande à taper</P>
+<P STYLE="margin-bottom: 0in">	<FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2>Police_console_violette</FONT></FONT></FONT><FONT COLOR="#7030a0">
+</FONT>= en mode texte (nano par exemple)</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Les fonctionnalités d'OCS</U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">OCS Inventory NG est un outil qui
+permet de réaliser un inventaire sur la configuration matérielle
+des machines du réseau et sur les logiciels qui y sont installés.
+OCS permet de visualiser cet inventaire grâce à une interface web.
+Il comporte également la possibilité de télé-déployer des
+applications sur un ensemble de machines. Une fonction des agents
+nommée IpDiscover permet de connaître l'intégralité des
+interfaces du réseau.</P>
+<P STYLE="margin-bottom: 0in">Les agents doivent être installés sur
+les machines clientes.</P>
+<P STYLE="margin-bottom: 0in">Les communications entre agents et
+serveurs de gestion utilisent les protocoles HTTP/HTTPS. Les  données
+sont formatées en XML et compressées avec Zlib pour réduire
+l'utilisation de la bande  passante du réseau.</P>
+<P STYLE="margin-bottom: 0in">Grâce à la fonctionnalité de
+découverte IP, OCS peut découvrir tous les matériels connectés au
+réseau, même ceux pour lesquels aucun agent n'est installé
+(imprimantes réseaux, commutateurs, routeurs, etc.).</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Collecteur de données sur les
+	matériels / logiciels -&gt; testé OK</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Télédiffusion, installation
+	d'applications et exécution de commandes sur les clients -&gt; en
+	cours de test ...</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Découverte réseau par IPDiscover
+	via ARP, ou par SNMP (switch, routeur, imprimante, onduleur ...)  -&gt;
+	testé OK : découverte de l'onduleur, imprimante, postes windows
+	mais pas des switchs et routeurs</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><A NAME="_Toc474162083"></A><U>Les
+fonctionnalités de GLPI</U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Calibri, serif"><FONT SIZE=3><FONT SIZE=2 STYLE="font-size: 11pt">GLPI
+est un logiciel et gestion de parc informatique qui intègre des
+fonctions d’inventaire informatique, de gestion de service
+assistance. C’est une application Full Web qui permet de gérer
+l’ensemble des problématiques de gestion de parc informatique : de
+la gestion de l’inventaire des composantes matérielles ou
+logicielles d’un parc informatique à la gestion de l’assistance
+aux utilisateurs. </FONT></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in">Il s’interface avec OCS pour
+centraliser et organiser les données récupérées par ce dernier.</P>
+<P STYLE="margin-bottom: 0in">Le serveur GLPI s'appuie sur le serveur
+OCS pour la remontée automatisée des éléments</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion d'inventaire complet -&gt; testé OK pour le premier premier
+	point</P>
+</UL>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Affectation du matériel par zone géographique (salle), par groupes
+	d’utilisateurs et par utilisateurs</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion des états de matériel</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion des consommables</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion du cycle de vie de chaque élément</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion des licences (acquises, à acquérir, ...) et des dates
+	d’expiration</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Extraction de l'inventaire -&gt; testé OK extraction au format .slk
+	(visualisable par excel)</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion des informations commerciales et financières</P>
+</UL>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	achat</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	garantie</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	amortissement</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion et suivi des demandes d’intervention et des tickets
+	d'incident  (helpdesk)</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion des fournisseurs, contrats, documents liés aux éléments
+	d’inventaires…</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Gestion de la documentation informatique (base de connaissance, FAQ,
+	...)</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Rapports et statistiques (nombres d'intervention, coût des
+	consommables, ...)</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Objectifs&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Inventaire des ordinateurs 	:</P>
+</UL>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Micro-ordinateur (marque, modèle, numéro de série) 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Processeur (nombre de cœurs et fréquence) 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Mémoire vive (quantité et fréquence) 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Disque dur (capacité et partitionnement) 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Carte graphique (fréquence processeur et mémoire) 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Ecran (marque, modèle, numéro de série) 
+	</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Inventaire logiciels :</P>
+</UL>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Connaître les systèmes d’exploitation et leurs versions 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Connaître les logiciels installés sur chaque micro-ordinateur et
+	leurs versions 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	numéros de licences des logiciels 
+	</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Inventaire actif réseau 	:</P>
+</UL>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Marque, modèle et numéro de série 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Switchs 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Bornes Wi-Fi 
+	</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Inventaire imprimantes et
+	copieurs&nbsp;:	</P>
+</UL>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Marque, modèle et numéro de série 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Capacité papier (A3, A4, enveloppes…) 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Couleur ou monochrome 
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Laser ou jet d’encre</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Versions de  l’OS / des
+applications installés :</U></P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Linux Ubuntu 16.04.1</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Apache 2.4.18</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	PHP 5.6.29-1</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	Mysql 5.7.16</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	OCS 2.3R</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%">
+	GLPI 9.1.1</P>
+</UL>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0.14in; line-height: 115%"><BR><BR>
+</P>
+<OL START=2>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in"><A NAME="_Toc474162087"></A>
+	Pré-requis</H1>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Avant
+d’installer OCS, il faut au préalable installer certaines
+applications&nbsp;nécessaires à son fonctionnement :</FONT></FONT></FONT></P>
+<OL>
+	<LI><P STYLE="margin-top: 0.03in; margin-bottom: 0in; display: none; page-break-inside: avoid; page-break-after: avoid">
+	</P>
+	<LI><P STYLE="margin-top: 0.03in; margin-bottom: 0in; display: none; page-break-inside: avoid; page-break-after: avoid">
+	</P>
+	<OL>
+		<LI><H2 CLASS="western">PHP</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+add-apt-repository ppa:ondrej/php</FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+   </FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>,
+taper entrée à la question posée</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+apt-get update</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+apt-get install php5.6 php5.6-mysql php5.6-gd php5.6-mbstring 
+php5.6-mysql php5.6-curl php5.6-soap php5.6-dom php-gettext
+php5.6-mbstring php-xdebug libapache2-mod-php5.6 php5.6-zip
+php5.6-imap make php5.6-ldap -y</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Alterner
+entre les versions de PHP version  de php7.0 vers php5.6 :</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+a2dismod php7.0 ; sudo a2enmod php5.6 ; sudo service apache2 restart </FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+ln -sfn /usr/bin/php5.6 /etc/alternatives/php</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>En
+cas de problème&nbsp;avec PHP : vérifier la version de PHP
+utilisée&nbsp;: php --version</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_b68f3106.png" NAME="Image 1" ALIGN=BOTTOM WIDTH=605 HEIGHT=109 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>En
+cas de problème&nbsp;avec PHP Pour vérifier les liens des versions
+de PHP</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_d026c45.png" NAME="Image 4" ALIGN=BOTTOM WIDTH=605 HEIGHT=65 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=2>
+		<LI><H2 CLASS="western">Apache</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>apt-get
+install apache2 apache2-utils openssl openssl-blacklist
+openssl-blacklist-extra -y</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>echo
+&quot;ServerName [nom du serveur avec suffixe]&quot;&gt;&gt;
+/etc/apache2/sites-available/000-default.conf</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>echo
+&quot;AddDefaultCharset utf-8&quot;&gt;&gt;
+/etc/apache2/sites-available/000-default.conf</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=3>
+		<LI><H2 CLASS="western">Mysql</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">apt-get
+install mysql-server -y &amp;&amp; service mysql start</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Puis
+compléter le mot de passe de Mysql&nbsp;deux fois de suite :</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_ac97d8d9.png" NAME="Image 2" ALIGN=BOTTOM WIDTH=605 HEIGHT=139 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>apt-get
+install libapache2-mod-perl2 libxml-simple-perl libio-compress-perl 
+libdbi-perl libdbd-mysql-perl libapache-dbi-perl libnet-ip-perl
+libsoap-lite-perl libproc-daemon-perl libapache2-mod-perl2-dev
+libphp-pclzip -y</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+service apache2 restart</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Création
+de la base de donnée d’OCS -&gt; «&nbsp;ocsweb&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>mysql
+-u root -p</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"> 
+<FONT FACE="Tahoma, serif"><FONT SIZE=2>mysql&gt;  </FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>CREATE
+DATABASE ocsweb ;</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"> 
+</FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">mysql&gt;
+ </SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">GRANT
+ALL PRIVILEGES ON ocsweb.* TO 'ocs'@'localhost' IDENTIFIED BY 'ocs' ;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"> 
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">mysql&gt; 
+ </SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">exit</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=4>
+		<LI><H2 CLASS="western">CPAN Perl</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">perl
+-MCPAN -e shell</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Would
+you like to configure as much as possible automatically? [yes] -&gt;
+</SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">yes</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">cpan[1]&gt;
+</SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">install
+CPAN</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">reload
+CPAN...</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+</FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="sv-SE">cpan[2]&gt;
+</SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">install
+YAML</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="sv-SE">reload
+YAML...</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="sv-SE">cpan[3]&gt;
+</SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">install
+SOAP::Lite</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+</FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">reload
+SOAP...</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">cpan[4]&gt;
+</SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">install
+Apache2::SOAP</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_e5b4c258.png" NAME="Image 8" ALIGN=BOTTOM WIDTH=231 HEIGHT=44 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Enter
+‘q’ to stop search</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Please
+tell me where I can find your apache src</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">
+</FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>[../apache_x.x/src]
+ -&gt; </FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>q</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_536326f9.png" NAME="Image 9" ALIGN=BOTTOM WIDTH=605 HEIGHT=86 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Do you
+want to install 'xml_pp' (XML pretty printer)? [y] -&gt; taper sur «
+entrée »</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Do you
+want to install 'xml_grep' (XML grep - grep XML files using
+XML::Twig's subset of XPath)? [y] -&gt; taper sur « entrée »</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Do you
+want to install 'xml_split' (split big XML files)? [y] -&gt; taper
+sur « entrée »</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Do you
+want to install 'xml_merge' (merge back files created by xml_split)?
+[y] -&gt; taper sur « entrée »</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Do you
+want to install 'xml_spellcheck' (spellcheck XML files skipping
+tags)? </SPAN></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>[y]
+-&gt; taper sur « entrée »</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2>cpan[5]&gt; </FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>install
+Archive::Zip</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a">   
+<FONT FACE="Tahoma, serif"><FONT SIZE=2>cpan[6]&gt; </FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>exit</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=5>
+		<LI><H2 CLASS="western">Outils additionnels</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">apt-get
+install libc6-dev nmap snmp build-essential -y</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL START=3>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in"><A NAME="_Toc474162088"></A>
+	Installation d’OCS en ligne de commande</H1>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>mkdir
+-p /home/server/install</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cd
+/home/server/install</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">wget
+https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/2.3RC1/OCSNG_UNIX_SERVER-2.3RC.tar.gz</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>tar
+-zxvf OCSNG_UNIX_SERVER-2.3RC.tar.gz</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cd
+OCSNG_UNIX_SERVER-2.3RC/</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>./setup.sh
+    </FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+confirmer l’installation d’OCS en tapant sur «&nbsp;Entrée&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_ceb11db1.png" NAME="Image 5" ALIGN=BOTTOM WIDTH=526 HEIGHT=247 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Sur
+chaque question, taper la touche «&nbsp;entrée&nbsp;» (-&gt;
+réponse par défaut), sauf sur celle-ci&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_5b2a20f.png" NAME="Image 6" ALIGN=BOTTOM WIDTH=488 HEIGHT=87 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Sur
+la question «&nbsp;The script will use the native package from your
+operating system like apt or rpm</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Do
+you wish to continue il faut taper yes&nbsp;» -&gt; faites «&nbsp;</FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>y</FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>&nbsp;»,
+faire «&nbsp;entrée&nbsp;» et confirmer à nouveau en faisant
+«&nbsp;entrée&nbsp;».</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Continuer
+à taper la touche «&nbsp;entrée&nbsp;» jusqu’à la fin du
+script.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Fin
+du script&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_ec77edc8.png" NAME="Image 10" ALIGN=BOTTOM WIDTH=605 HEIGHT=186 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">a2enconf
+z-ocsinventory-server &amp;&amp; a2enconf ocsinventory-reports &amp;&amp;
+service apache2 reload</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cd
+/var/lib/</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>chmod
+777 ocsinventory-reports/                </FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+réajuster les droits …</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL START=3>
+	<LI><P STYLE="margin-top: 0.03in; margin-bottom: 0in; display: none; page-break-inside: avoid; page-break-after: avoid"><A NAME="_Toc474162089"></A>
+	</P>
+	<OL>
+		<LI><H2 CLASS="western">Poursuite de l’installation d’OCS via
+		l’interface web</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Taper
+dans un navigateur l’adresse&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>http://[adresse_IP_du_nouveau_serveur_OCS]/ocsreports/index.php</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Connexion&nbsp;pour
+la finalisation de l’installation du serveur:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+root</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+[mot_de_passe_de_Mysql]</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+ocsweb</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+localhost</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_3abb4006.png" NAME="Image 12" ALIGN=BOTTOM WIDTH=747 HEIGHT=238 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Attendre
+30 secondes …</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Cliquer
+sur  &quot;Click here to enter OCS-NG GUI&quot;</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_933d64b7.png" NAME="Image 13" ALIGN=BOTTOM WIDTH=288 HEIGHT=122 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Cliquer
+sur   &quot;Perform the update&quot; si cela est affiché</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=2>
+		<LI><H2 CLASS="western"><A NAME="_Toc474162090"></A>Connexion à
+		l’interface web</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Connexion
+avec mot de passe OCS par défaut (à rapidement modifier&nbsp;!)</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+admin</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+admin</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Pour
+mettre en Fr : sélectionner le drapeau sur la fenêtre de connexion
+d'OCS</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_c0f96ba8.png" NAME="Image 14" ALIGN=BOTTOM WIDTH=147 HEIGHT=188 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Page
+d’accueil d’OCS&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-left: -0.59in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_bd66ed01.png" NAME="Image 15" ALIGN=BOTTOM WIDTH=710 HEIGHT=188 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=3>
+		<LI><H2 CLASS="western"><A NAME="_Toc474162091"></A>Finalisation de
+		l’installation</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Par
+sécurité, il faut supprimer install.php&nbsp;: </FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">rm
+/usr/share/ocsinventory-reports/ocsreports/install.php</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Il
+est possible de supprimer les messages d'alerte dans la console
+d'administration&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>sur
+l'interface Gui -&gt; configuration / utilisateurs / profils / le
+profil concerné</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"> 
+</FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">-&gt;
+See warning messages of the GUI -&gt; NO</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_730b8215.png" NAME="Image 16" ALIGN=BOTTOM WIDTH=605 HEIGHT=265 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><A NAME="_Toc474162092"></A>A savoir&nbsp;:
+l<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>e
+fichier apache d'OCS : nano
+/etc/apache2/conf-enabled/z-ocsinventory-server.conf </FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL START=4>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in"><A NAME="_Toc474162093"></A>
+	Installation&nbsp;de GLPI</H1>
+</OL>
+<OL START=4>
+	<LI><P STYLE="margin-top: 0.03in; margin-bottom: 0in; display: none; page-break-inside: avoid; page-break-after: avoid"><A NAME="_Toc474162094"></A>
+	</P>
+	<OL>
+		<LI><H2 CLASS="western">Pré-requis</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Avant
+d’installer GLPI, il faut au préalable ajouter la base de données
+nécessaires à son fonctionnement :</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>mysql
+-u root -p</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>mysql&gt;
+ </FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>CREATE
+DATABASE glpi ;</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">mysql&gt;
+ </SPAN></FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">GRANT
+ALL PRIVILEGES ON glpi.* TO 'glpi'@'localhost' IDENTIFIED BY 'glpi' ;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>mysql&gt;
+ </FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>exit</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=2>
+		<LI><H2 CLASS="western"><A NAME="_Toc474162095"></A>Installation de
+		GLPI en ligne de commande</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cd
+/home/server/install</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">wget
+https://github.com/glpi-project/glpi/releases/download/9.1.1/glpi-9.1.1.tgz</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">tar
+xvf glpi-9.1.1.tgz</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mv
+glpi /var/www</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">chown
+-R www-data:www-data /var/www/glpi</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=3>
+		<LI><H2 CLASS="western"><A NAME="_Toc474162096"></A>Configuration
+		de l’accès Web à GLPI</H2>
+	</OL>
+</OL>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Créer
+un nouveau fichier de configuration d'apache pour glpi :</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/apache2/sites-available/glpi.conf</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Ajouter
+dans ce nouveau fichier&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="es-ES">Alias
+/glpi /var/www/glpi</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="it-IT">&lt;VirtualHost
+*:80&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0">
+       <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="it-IT">ServerName
+glpi</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0">
+       <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="it-IT">ServerAlias
+glpi</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0">
+       <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="it-IT">DocumentRoot
+/var/www/glpi</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#7030a0">   
+ </FONT><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;Directory
+/var/www/glpi&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0">
+       <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Options
+Indexes FollowSymLinks MultiViews</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0">
+       <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">AllowOverride
+All</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0">
+       <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Order
+allow,deny</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#7030a0"> <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">	
+      allow from all</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#7030a0">   
+ <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;/Directory&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#7030a0"> <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">	
+      CustomLog ${APACHE_LOG_DIR}/glpi_access.log combined</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#7030a0"> <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">	
+      ErrorLog  ${APACHE_LOG_DIR}/glpi_error.log</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;/VirtualHost&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_4cd40fe5.png" NAME="Image 17" ALIGN=BOTTOM WIDTH=538 HEIGHT=180 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Activer
+le site web&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>a2ensite
+glpi.conf</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+apache2 restart</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=4>
+		<LI><H2 CLASS="western"><A NAME="_Toc474162097"></A>Poursuite de
+		l’installation d’OCS via l’interface web</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>http://[adresse_IP_du_nouveau_serveur_OCS]/glpi</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+français</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_acd58635.png" NAME="Image 18" ALIGN=BOTTOM WIDTH=432 HEIGHT=135 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+Lire l’ensemble du texte &quot;j'ai lu et j'accepte ...&quot;  à
+tête reposé&nbsp;;-) -&gt; cliquer sur «&nbsp;continuer&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_53a6ceaf.png" NAME="Image 19" ALIGN=BOTTOM WIDTH=385 HEIGHT=251 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+cliquer sur «&nbsp;&quot;installer&quot;&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_f4cf8c37.png" NAME="Image 20" ALIGN=BOTTOM WIDTH=393 HEIGHT=157 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Vérification
+de l’environnement de compatibilité pour GLPI&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_ce8dccb9.png" NAME="Image 21" ALIGN=BOTTOM WIDTH=391 HEIGHT=441 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Etape
+1 -&gt; Configuration de la connexion à la base de données&nbsp;:
+cliquer sur «&nbsp;continuer&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_1a9511c3.png" NAME="Image 22" ALIGN=BOTTOM WIDTH=345 HEIGHT=193 BORDER=0></P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Attendre
+30 secondes environ</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Etape
+2 -&gt; Sélectionner «&nbsp;glpi&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_870c39a0.png" NAME="Image 23" ALIGN=BOTTOM WIDTH=338 HEIGHT=200 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Etape
+3 -&gt; glpi	setup&nbsp;: cliquer sur «&nbsp;continuer&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_3370dc2f.png" NAME="Image 24" ALIGN=BOTTOM WIDTH=372 HEIGHT=135 BORDER=0></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Etape
+4 -&gt; glpi setup&nbsp;: cliquer sur «&nbsp;utiliser GLPI&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_d3fa54f5.png" NAME="Image 25" ALIGN=BOTTOM WIDTH=350 HEIGHT=157 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Connexion
+à l’interface de gestion de GLPI&nbsp;: identifiant et mot de
+passe par défaut -&gt; glpi / glpi (à modifier&nbsp;!)</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_9d35beab.png" NAME="Image 26" ALIGN=BOTTOM WIDTH=148 HEIGHT=188 BORDER=0></P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Interface
+d’accueil de GLPI</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-left: -0.69in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_51142387.png" NAME="Image 27" ALIGN=BOTTOM WIDTH=746 HEIGHT=294 BORDER=0></P>
+<OL>
+	<OL START=5>
+		<LI><H2 CLASS="western"><A NAME="_Toc474162098"></A>Finalisation de
+		l’installation</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Permissions
+à donner aux dossiers de GLPI</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>chmod
+-R 777 /var/www/glpi/files</FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+                     </FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-&gt;
+droits à réajuster&nbsp;!</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>chmod
+-R 777 /var/www/glpi/config</FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+                   -&gt; droits à réajuster&nbsp;!</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Supprimer
+install/install.php&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>rm
+/var/www/glpi/install/install.php</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Il
+est recommandé de Modifier les mots de passe par défaut de glpi,
+normal, post-only, tech&nbsp;-&gt; Administration / Utilisateurs : </FONT></FONT></FONT>
+</P>
+<P ALIGN=CENTER STYLE="margin-left: -0.69in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_8d03fc0f.png" NAME="Image 28" ALIGN=BOTTOM WIDTH=744 HEIGHT=421 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL START=5>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in"><A NAME="_Toc474162099"></A>
+	Liaison entre OCS et GLPI</H1>
+</OL>
+<OL START=5>
+	<LI><P STYLE="margin-top: 0.03in; margin-bottom: 0in; display: none; page-break-inside: avoid; page-break-after: avoid">
+	</P>
+	<OL>
+		<LI><H2 CLASS="western">Préparation</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Au
+préalable, faire sur l’interface web d’OCS : configuration /
+configuration / Serveur / TRACE_DELETED -&gt; ON</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_916b21a9.png" NAME="Image 29" ALIGN=BOTTOM WIDTH=749 HEIGHT=507 BORDER=0></P>
+<P ALIGN=CENTER STYLE="margin-left: -0.79in; margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=2>
+		<LI><H2 CLASS="western"><A NAME="_Toc474162100"></A>Installation du
+		plugin ocsinventoryng-</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cd
+/home/server/install</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>wget
+https://github.com/pluginsGLPI/ocsinventoryng/releases/download/1.2.3/glpi-ocsinventoryng-1.2.3.tar.gz</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>tar
+-xvzf glpi-ocsinventoryng-1.2.3.tar.gz</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">cp
+-r ocsinventoryng/ /var/www/glpi/plugins</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">chown
+-R www-data:www-data /var/www/glpi/plugins/ocsinventoryng/</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">rm
+/var/www/glpi/plugins/remove.txt</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Sur
+l’interface web de GLPI -&gt; cliquer sur&nbsp;: configuration /
+plugins</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>ensuite
+cliquer sur &quot;installer&quot;</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_bf395d78.png" NAME="Image 30" ALIGN=BOTTOM WIDTH=743 HEIGHT=198 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Finalement
+cliquer sur &quot;activer&quot;</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_7188a2b1.png" NAME="Image 31" ALIGN=BOTTOM WIDTH=57 HEIGHT=29 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Ajouter
+le serveur OCS dans GLPI</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Cliquer
+sur outils / OCS Inventory NG / Ajouter un serveur OCSNG / «&nbsp;+&nbsp;»</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_ee7b8b6d.png" NAME="Image 32" ALIGN=BOTTOM WIDTH=87 HEIGHT=167 BORDER=0></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_7066f7b8.png" NAME="Image 33" ALIGN=BOTTOM WIDTH=422 HEIGHT=72 BORDER=0></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_4946d4c3.png" NAME="Image 34" ALIGN=BOTTOM WIDTH=572 HEIGHT=54 BORDER=0></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Nom&nbsp;:
+				ocs</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>hôte
+	: 		      	localhost</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>base :
+		       		ocsweb</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>utilisateur
+	: 		root</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>mot de
+	passe : 		[mot de passe]</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>actif
+	: 	           		oui</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>base
+	UTF8 : 		oui</FONT></FONT></FONT></P>
+</UL>
+<P ALIGN=CENTER STYLE="margin-left: -0.69in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_59f92caf.png" NAME="Image 35" ALIGN=BOTTOM WIDTH=731 HEIGHT=254 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Test
+de connexion entre GLPI et OCS&nbsp;: cliquer sur outils / OCS
+Inventory NG / Configuration du serveur / Configuration du serveur
+OCSNG : ocs/ Test</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_905ac089.png" NAME="Image 36" ALIGN=BOTTOM WIDTH=746 HEIGHT=266 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Configuration
+du plugin OCSNG</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-
+Options d'importations</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Cliquer
+sur&nbsp;: outils / OCS Inventory NG / Configuration du serveur /
+Configuration du serveur OCSNG : ocs / Options d’importation</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Sélectionner&nbsp;:</FONT></FONT></FONT></P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>comportement
+	lors de la déconnexion -&gt; &quot;conserver&quot;</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>périphériques,
+	moniteurs, imprimantes -&gt; &quot;import global&quot;</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">logiciels
+	-&gt; &quot;import unique&quot;</SPAN></FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">volumes
+	-&gt; &quot;oui&quot;</SPAN></FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>utiliser
+	le dictionnaire logiciel d'OCSNG -&gt; &quot;non&quot;</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">base
+	de registre -&gt; &quot;non&quot;</SPAN></FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">machines
+	virtuelles -&gt; &quot;oui&quot;</SPAN></FONT></FONT></FONT></P>
+</UL>
+<P ALIGN=CENTER STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_d617bfa9.png" NAME="Image 38" ALIGN=BOTTOM WIDTH=714 HEIGHT=476 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>-
+Données à importer</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Cliquer
+sur&nbsp;: outils / OCS Inventory NG / Configuration du serveur /
+Configuration du serveur OCSNG : ocs / données à importer / </FONT></FONT></FONT>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>colonne
+	de gauche et du centre -&gt; tout à &quot;oui&quot;</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>colonne
+	de droite -&gt; tout à &quot;tag&quot; </FONT></FONT></FONT>
+	</P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>date
+	de mise en service -&gt; &quot;DEVICEID&quot;</FONT></FONT></FONT></P>
+</UL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+<BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+<BR><BR>
+</P>
+<OL START=6>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in"><A NAME="_Toc472000670"></A>
+	Gestion des objets</H1>
+</OL>
+<OL START=6>
+	<LI><P STYLE="margin-top: 0.03in; margin-bottom: 0in; display: none; page-break-inside: avoid; page-break-after: avoid"><A NAME="_Toc472000671"></A>
+	</P>
+	<OL>
+		<LI><H2 CLASS="western">Gestion des entités</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Dans
+GLPI, administrer les entités peut se faire à partir du menu
+Administration &gt; Entités .</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>La
+notion d'entité est une notion clé dans GLPI. Elle peut
+s'apparenter à la notion de hiérarchie, de service au sein d'une
+administration d'une entreprise ou d'un système d'information. Elle
+permet d'isoler des ensembles organisés de manière hiérarchique
+dans une instance unique de GLPI (une seule installation de GLPI). Le
+terme choisi est volontairement neutre, afin de pouvoir s'adapter à
+chaque système d'information. Une seule instance de GLPI composée
+de plusieurs entités permet la consolidation des données et des
+règles communes. L'utilisation des entités permet un cloisonnement
+relativement étanche entre les unités organisationnelles. Dans les
+cas où ce cloisonnement étanche n'est pas souhaité, il est
+préférable d'utiliser les fonctionnalités offertes par les
+groupes. La segmentation en entités peut avoir plusieurs finalités
+: isoler le parc informatique de chaque service afin de limiter la
+vision du parc à certains groupes ou utilisateurs ; isoler le parc
+informatique de différents clients, reproduire la hiérarchie
+existante au sein de votre Annuaire informatique (LDAP, Active
+Directory)... Cette notion est très intéressante pour une
+entreprise dont la gestion est hiérarchique et où les personnes
+doivent avoir une vision du parc dépendant de leur appartenance à
+un service.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Une
+fois plusieurs entités créées dans GLPI, l'inventaire de votre
+parc, les utilisateurs, les profils ou encore le service d'assistance
+devient fonction des entités. Autrement dit, on peut affecter un
+ordinateur à une entité, déclarer un ticket sur une entité, créer
+des profils, gérer des habilitations spécifiques à chaque entité.
+L'affectation automatique des utilisateurs et des matériels est
+possible grâce au paramétrage de règles.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>On
+considère la hiérarchie suivante :</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_9e5300ff.png" NAME="Image 224" ALIGN=BOTTOM WIDTH=130 HEIGHT=56 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>L'entité
+mère (EM, ou nativement appelée Entité Racine dans GLPI) possède
+deux filiales (EA et EB) qui possèdent à leur tour deux
+départements chacune (EA1, EA2, EB1 et EB2). Chaque entité possède
+une vision de son parc et des entités qui lui sont affiliées.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>EM a
+	une vision de son parc et de toutes les entités.</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>EA a
+	une vision de son parc et de EA1 et EA2.</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>EA1 ne
+	voit que son parc.</FONT></FONT></FONT></P>
+</UL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Un
+utilisateur peut être rattaché à plusieurs entités avec des
+droits différents. Ces droits peuvent être conservés sur les
+entités filles ou non. Pour reprendre l'exemple précédent, un
+utilisateur ne pourra ne déclarer un ticket qu'au sein de son
+service, se rapportant uniquement au matériel qui lui est rattaché
+ou à un matériel de son service (une imprimante, un écran...).</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Inversement,
+un utilisateur disposant d'habilitations plus étendues pourra
+consulter l'ensemble des matériels, tickets ou autres objets. Et ce,
+sur toutes les entités sur lesquels ses droits sont applicables.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Par
+défaut, GLPI s'installe avec une entité générique, appelée
+Entité Racine. Il est donc mono-entité. Cette entité peut être
+renommée simplement en modifiant celle-ci.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=2>
+		<LI><H2 CLASS="western"><A NAME="_Toc472000672"></A>Gestion des
+		groupes</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Dans
+GLPI, administrer les groupes peut se faire à partir du menu
+Administration &gt; Groupes .</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Depuis
+le menu Administration &gt; Groupes , il est possible d'ajouter,
+modifier, supprimer des groupes, de faire des recherches et de les
+exporter.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Les
+groupes peuvent être définis sous forme d'arborescence afin de
+faciliter la navigation et la recherche. Exemple : Direction &gt;
+Département &gt; Service ou Support N3 &gt; Réseau &gt; LAN</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Les
+groupes peuvent avoir plusieurs fonctions : rassemblement
+d'utilisateurs par compétences (par exemple les techniciens réseaux,
+ou les administrateurs de base de données) pour le helpdesk,
+regroupements organisationnels (par exemple tous les ordinateurs de
+la direction, ou du service comptable) mais aussi ensemble de
+personnes à notifier.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Les
+options disponibles permettant de régler ces comportements sont
+Visible dans un ticket (groupe du demandeur et/ou attribution à ce
+groupe), Peut être notifié (destinataire de notifications) et enfin
+Peut contenir (matériel et/ou utilisateurs).</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Dans
+la fiche des matériels, 2 notions de groupes sont disponibles :
+groupe technique, qui indique quel groupe de personnes a la charge du
+matériel (équivalent pour un groupe du responsable technique), et
+groupe qui indique à quel groupe de matériels celui-ci appartient.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL START=3>
+		<LI><H2 CLASS="western"><A NAME="_Toc472000673"></A>Gestion des
+		utilisateurs</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>La
+configuration des utilisateurs de GLPI s’effectue sur l’onglet&nbsp;:
+administration / utilisateurs</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_a35539bf.png" NAME="Image 57" ALIGN=BOTTOM WIDTH=70 HEIGHT=171 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_e0f0fca4.png" NAME="Image 228" ALIGN=BOTTOM WIDTH=711 HEIGHT=256 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-left: 1.78in; text-indent: -0.4in; margin-top: 0.17in; page-break-after: avoid"><A NAME="_Toc472000674"></A>
+<FONT COLOR="#325a7e"><FONT FACE="Calibri, serif"><FONT SIZE=4>Ajout
+d’un utilisateur</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Pour
+ajouter un utilisateur, faire «&nbsp;ajouter un utilisateur&nbsp;» </FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_8c34b350.png" NAME="Image 58" ALIGN=BOTTOM WIDTH=167 HEIGHT=55 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Puis
+remplir les champs nécessaires&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-left: -0.69in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_16764487.png" NAME="Image 59" ALIGN=BOTTOM WIDTH=666 HEIGHT=359 BORDER=0></P>
+<OL>
+	<OL START=4>
+		<LI><H2 CLASS="western"><A NAME="_Toc472000675"></A>Gestion des
+		profils</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>La
+gestion des profils des utilisateurs s’effectue sur l’onglet&nbsp;:
+administration / profils&nbsp;:</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_9d70fc65.png" NAME="Image 65" ALIGN=BOTTOM WIDTH=61 HEIGHT=152 BORDER=0></P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Les
+différents profils par défaut&nbsp;:</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_eee5928f.png" NAME="Image 66" ALIGN=BOTTOM WIDTH=274 HEIGHT=170 BORDER=0></P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Super-Admin
+	: Ce profil dispose de tous les droits!</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><B>Admin</B></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+	:  Ce profil dispose de droits d'administration sur l'intégralité
+	de GLPI. Certaines restrictions lui sont appliquées au niveau de la
+	configuration des règles, des entités ainsi que d'autres rubriques
+	pouvant altérer le comportement de GLPI</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><B>Technician
+	</B></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>:
+	Ce profil correspond à celui utilisé pour un technicien de
+	maintenance. Il a accès à l'inventaire en lecture et au helpdesk
+	afin de traiter des tickets</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><B>Supervisor</B></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+	: Ce profil reprend les élements du profil Technician en y ajoutant
+	des élément permettant la gestion d'une équipe et son
+	organisation (attribution de tickets...)</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><B>Observer</B></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+	: Ce profil dispose de droits de lecture sur toutes les données
+	d'inventaire et de gestion. Au niveau de l'assistance, il pourra
+	déclarer un ticket ou s'en voir attribuer mais ne pourra
+	administrer cette rubrique (attribuer un ticket, voler un
+	ticket...). Il ne dispose cependant d'aucun droit lié à
+	l'administration ou à la configuration de GLPI</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><B>Hotliner</B></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+	: Ce profil correspond à celui que l'on pourrait donner pour un
+	service de Hotline. Il permet de saisir des tickets et de les suivre
+	mais pas d'en être en charge comme peut l'être un technicien</FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><B>Self-Service</B></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+	: Ce profil est le plus limité. C'est d'ailleurs le seul à
+	disposer d'une interface différente, l'interface simplifiée, en
+	opposition à l'interface standard. Il pourra cependant déclarer un
+	ticket, y ajouter un suivi, consulter la FAQ ou encore réserver un
+	matériel. </FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Ce
+	profil est enregistré comme profil par défaut</SPAN></FONT></FONT></FONT></P>
+</UL>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Modifications
+des habilitations d’un utilisateur (ajout d’un profil)</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>L’opération
+s’effectue via le menu&nbsp;: administration / utilisateur / -&gt;
+choisir l’utilisateur / habilitations</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Choisir
+le profil (un seul suffit pour éviter les confits), puis cliquer sur
+le bouton «&nbsp;ajouter&nbsp;»</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_eccb3d29.png" NAME="Image 225" ALIGN=BOTTOM WIDTH=605 HEIGHT=225 BORDER=0></P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Exemple
+de menu avec les habilitations d’un utilisateur en «&nbsp;Self-Service
+»</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_13b5a5d.png" NAME="Image 226" ALIGN=BOTTOM WIDTH=603 HEIGHT=67 BORDER=0></P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Exemple
+de menu avec les habilitations d’un utilisateur en « Super-Admin&nbsp;»</FONT></FONT></FONT></P>
+<P STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_dea4a49d.png" NAME="Image 227" ALIGN=BOTTOM WIDTH=605 HEIGHT=57 BORDER=0></P>
+<P STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+<BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_124a32b3.png" NAME="Image 39" ALIGN=BOTTOM WIDTH=605 HEIGHT=326 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL START=7>
+	<LI><H1 CLASS="western"><A NAME="_Toc474162101"></A>Sécuriser le
+	serveur</H1>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<OL>
+	<OL>
+		<LI><H2 CLASS="western">SECURISER LE SERVEUR WEB EN SSL</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Activer
+le mode SSL&nbsp;: </FONT></FONT></FONT><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>a2enmod
+ssl</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Création
+du nouveau fichier /etc/apache2/sites-available/ssl.conf avec le
+contenu suivant&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/apache2/sites-available/ssl.conf</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">#NameVirtualHost
+*:443</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&lt;VirtualHost
+*:443&gt;</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">ServerAdmin
+[adresse mail]</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">ServerName
+[nom du serveur]</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">DocumentRoot
+/etc/apache2/sites-available/</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&lt;Directory
+/&gt;</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">Options
+FollowSymLinks</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            </FONT><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">AllowOverride
+All</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;/Directory&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;Directory
+&quot;/etc/apache2/sites-available&quot;&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Options
+Indexes FollowSymLinks MultiViews</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">AllowOverride
+None</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Order
+allow,deny</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">allow
+from all</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;/Directory&gt;</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ScriptAlias
+/cgi-bin/ /usr/lib/cgi-bin/</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;Directory
+&quot;/usr/lib/cgi-bin&quot;&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">AllowOverride
+None</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Options
+-ExecCGI -MultiViews +SymLinksIfOwnerMatch</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Order
+allow,deny</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+            <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Allow
+from all</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;/Directory&gt;</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ErrorLog
+/var/log/apache2/error.log</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">#
+Possible values include: debug, info, notice, warn, error, crit,</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">#
+alert, emerg.</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">LogLevel
+warn</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">SSLEngine
+On</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">SSLCipherSuite
+ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    </FONT><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">SSLCertificateKeyFile
+/etc/apache2/ssl/server.key</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">SSLCertificateFile
+/etc/apache2/ssl/server.crt</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    </FONT><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">CustomLog
+/var/log/apache2/access.log combined</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ServerSignature
+On</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+<FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Alias
+/doc/ &quot;/usr/share/doc/&quot;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+<FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;Directory
+&quot;/usr/share/doc/&quot;&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Options
+Indexes MultiViews FollowSymLinks</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">AllowOverride
+None</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Order
+deny,allow</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Deny
+from all</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+    <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Allow
+from 127.0.0.0/255.0.0.0 ::1/128</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+<FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;/Directory&gt;</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+<FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Alias
+/download &quot;/var/lib/ocsinventory-reports/download&quot;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+<FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">&lt;Directory
+&quot;/var/lib/ocsinventory-reports/download&quot;&gt;</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+     <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Options
+Indexes MultiViews FollowSymlinks</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+     <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">AllowOverride
+None</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+     <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Order
+deny,allow</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+     <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Allow
+from all</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">   
+</FONT><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&lt;/Directory&gt;</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&lt;/VirtualHost&gt;</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Création
+des clés SSL publique et privée  -&gt; server.key</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>openssl
+genrsa -des3 -out server.key 1024</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Enregistrer
+la passphrase dans le fichier pour ne pas avoir à la renseigner à
+chaque boot :</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mv
+server.key server-old.key </SPAN></FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">openssl
+rsa -in server-old.key -out server.key</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Création
+du certificat (pour le &quot;Common Name&quot; mettre le nom du
+serveur avec suffixe )</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">openssl
+req -new -key server.key -out server.csr</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Auto-signature
+du certificat</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">openssl
+x509 -req -days 3650 -in server.csr -signkey server.key -out
+server.crt</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Mise
+en place du certificat</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Pour
+cela on place ces 2 fichiers dans le sous-répertoire d'apache
+précédemment créé :</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>mkdir
+/etc/apache2/ssl</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cp
+server.crt /etc/apache2/ssl/</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cp
+server.key /etc/apache2/ssl/</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Activation
+du VirtualHost SSL</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>On
+active le VirtuaHost</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>a2ensite
+ssl.conf</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>On
+redémarre apache </FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>/etc/init.d/apache2
+restart</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Puis
+on teste avec https://[IP_Serveur]</FONT></FONT></FONT></P>
+<OL START=8>
+	<LI><H1 CLASS="western"><A NAME="_Toc472000676"></A>Installation de
+	l’agent OCS sur les hôtes</H1>
+	<OL>
+		<LI><H2 CLASS="western"><A NAME="_Toc472000677"></A>Hôtes Linux</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Sur
+un agent dont l’OS est Linux (testé pour l’instant sur Ubuntu
+16.04, Ubuntu 14.04, debian 8.4)</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">apt-get
+install ocsinventory-agent -y</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Sélectionner
+«&nbsp;HTTP&nbsp;»&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_2f6ada2.png" NAME="Image 43" ALIGN=BOTTOM WIDTH=416 HEIGHT=142 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>indiquer
+l’adresse du serveur de gestion de Parc&nbsp;: </FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>http://[adresse_IP_du_serveur_GLPI/OCS]/ocsinventory</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_3fb57a65.png" NAME="Image 232" ALIGN=BOTTOM WIDTH=451 HEIGHT=164 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Pour
+reconfigurer l’agent, c’est-à-dire par exemple mettre à jour le
+«&nbsp;tag&nbsp;» de l’agent ou l’adresse IP du serveur de
+Gestion de Parc : </FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>dpkg-reconfigure
+ocsinventory-agent</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_a7f5e655.png" NAME="Image 231" ALIGN=BOTTOM WIDTH=605 HEIGHT=105 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Transmettre
+les informations vers le serveur GLPI/OCS</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+ocsinventory-agent</FONT></FONT></FONT></P>
+<OL>
+	<OL START=2>
+		<LI><H2 CLASS="western"><A NAME="_Toc472000678"></A>Hôtes Windows</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>L’application
+Ocs_agent est disponible dans le répertoire&nbsp;:
+Y:\Outils\Windows\Systeme</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Installer&nbsp;:
+OCS-NG-Windows-Agent-Setup.exe</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Tout
+cocher sauf local inventory</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Indiquer
+l’adresse IP du serveur&nbsp;:
+http://[adresse_IP_du_serveur_GLPI/OCS]/ocsinventory</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>proxy
+: rien faire -&gt; suivant</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><U>Pour
+information&nbsp;:</U></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>L’application
+s’installe par défaut dans C:\ProgramData\OCS Inventory NG\Agent</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><U>Répertoire
+de configuration</U></FONT></FONT></FONT><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>
+</FONT></FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Configuration&nbsp;:
+ocsinventory.ini : c:\ProgramData\OCS Inventory NG\Agent</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Logs
+: C:\ProgramData\OCS Inventory NG\Agent\OCSInventory.log</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Téléchargement
+: C:\ProgramData\OCS Inventory NG\Agent\Download.log.bak</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-right: -0.49in; margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Exemple
+du fichier de configuration par défaut&nbsp;(C:\ProgramData\OCS
+Inventory NG\Agent\ ocsinventory) :</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">[OCS
+Inventory Agent]</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ComProvider=ComHTTP.dll</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Debug=1</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Local=</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">NoSoftware=0</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">HKCU=0</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">NoTAG=0</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">IpDisc=</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">[HTTP]</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Server=[https://adresse_serveur]</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">SSL=1</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">CaBundle=cacert.pem</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">AuthRequired=0</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">User=</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Pwd=</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ProxyType=0</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Proxy=</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ProxyPort=0</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ProxyAuthRequired=0</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ProxyUser=</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">ProxyPwd=</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">[OCS
+Inventory Service]</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">TTO_WAIT=70860</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">PROLOG_FREQ=24</SPAN></FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">OLD_PROLOG_FREQ=24</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>En
+cas d'arrêt du service d'OCS, pour le redémarrer&nbsp;:</FONT></FONT></FONT></P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">soit
+	redémarrer le poste</SPAN></FONT></FONT></FONT></P>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-top: 0.08in; margin-bottom: 0.14in; line-height: 115%">
+	<FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2><SPAN LANG="en-US">Sinon,
+	cliquer sur OCSInventory.exe, OcsNotifyUser.exe et OcsSystray.exe
+	dans C:\Program Files (x86)\OCS Inventory Agent, puis taper
+	“services.msc” dans exécuter -&gt; pour démarrer &quot;OCS
+	Inventory Service&quot;</SPAN></FONT></FONT></FONT></P>
+</UL>
+<OL>
+	<OL START=3>
+		<LI><H2 CLASS="western"><A NAME="_Toc472000679"></A>Ajout des
+		ordinateurs sur le serveur OCS</H2>
+	</OL>
+</OL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Dès
+que l’agent est installé sur les hôtes Linux ou Windows, celui-ci
+transmettra automatiquement les informations matérielles au serveur
+OCS.</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>La
+seule condition est que l’hôte soit sur le même réseau que le
+serveur (pas possible via le wi-fi par exemple)</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Pour
+visualiser les nouveaux hôtes sur l’interface Web d’OCS, il
+suffit de cliquer sur «&nbsp;toutes les machines&nbsp;» (en haut à
+gauche)&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_7eca4820.png" NAME="Image 230" ALIGN=BOTTOM WIDTH=710 HEIGHT=229 BORDER=0></P>
+<OL>
+	<OL START=4>
+		<LI><H2 CLASS="western">Ajout d’ordinateurs sur GLPI</H2>
+	</OL>
+</OL>
+<P STYLE="margin-left: -0.79in; margin-top: 0.08in"><BR><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><A NAME="_Toc472000680"></A>Ajout
+	des ordinateurs depuis la base d’OCS 
+	</P>
+</UL>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Après
+avoir ajouter les nouveaux ordinateurs, il faut l’ajouter à GLPI,
+en synchronisant avec OCS&nbsp;:</FONT></FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Cliquer
+sur outils / OCS Inventory NG / import de l'inventaire / importation
+de nouveaux ordinateurs / tout cocher /  importer</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_4248afa5.png" NAME="Image 46" ALIGN=BOTTOM WIDTH=741 HEIGHT=378 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><FONT COLOR="#00000a"><FONT FACE="Tahoma, serif"><FONT SIZE=2>Enfin
+pour visualiser les ordinateurs dans GLPI : Parc / ordinateurs</FONT></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-top: 0.08in"><IMG SRC="glpi-ocs_html_5c13765d.png" NAME="Image 47" ALIGN=BOTTOM WIDTH=77 HEIGHT=216 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-left: -0.79in; margin-top: 0.08in"><IMG SRC="glpi-ocs_html_a4e6beff.png" NAME="Image 229" ALIGN=BOTTOM WIDTH=743 HEIGHT=355 BORDER=0></P>
+<P STYLE="margin-left: -0.79in; margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-left: -0.79in; margin-top: 0.08in"><BR><BR>
+</P>
+<P STYLE="margin-left: -0.79in; margin-top: 0.08in"><BR><BR>
+</P>
+</BODY>
+</HTML>

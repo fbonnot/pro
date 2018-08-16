@@ -1,0 +1,1072 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
+	<META NAME="AUTHOR" CONTENT="BONNOT Fabrice">
+	<META NAME="CREATED" CONTENT="20180703;73100000000000">
+	<META NAME="CHANGEDBY" CONTENT="BONNOT Fabrice">
+	<META NAME="CHANGED" CONTENT="20180810;93600000000000">
+	<META NAME="AppVersion" CONTENT="16.0000">
+	<META NAME="Company" CONTENT="SopraSteria">
+	<META NAME="DocSecurity" CONTENT="0">
+	<META NAME="HyperlinksChanged" CONTENT="false">
+	<META NAME="LinksUpToDate" CONTENT="false">
+	<META NAME="ScaleCrop" CONTENT="false">
+	<META NAME="ShareDoc" CONTENT="false">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin-left: 0.75in; margin-right: 0.75in; margin-top: 1in; margin-bottom: 1in }
+		P { margin-bottom: 0.08in; direction: ltr; line-height: 100%; widows: 2; orphans: 2 }
+		H1 { margin-bottom: 0in; direction: ltr; color: #2e74b5; line-height: 100%; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H1.western { font-family: "Calibri Light", serif; font-size: 16pt; font-weight: normal }
+		H1.cjk { font-size: 16pt; font-weight: normal }
+		H1.ctl { font-family: ; font-size: 16pt; font-weight: normal }
+		H2 { margin-top: 0.03in; margin-bottom: 0in; direction: ltr; color: #2e74b5; line-height: 100%; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H2.western { font-family: "Calibri Light", serif; font-size: 13pt; font-weight: normal }
+		H2.cjk { font-family: "Arial"; font-size: 13pt; font-weight: normal }
+		H2.ctl { font-family: ; font-size: 13pt; font-weight: normal }
+		A:link { color: #0563c1; so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="fr-FR" LINK="#0563c1" DIR="LTR">
+<P STYLE="margin-bottom: 0in"><A NAME="_GoBack"></A><U>Avant de
+débuter</U></P>
+<P STYLE="margin-bottom: 0in">Légende&nbsp;:</P>
+<P STYLE="margin-bottom: 0in">	[entre crochets] = argument à
+personnaliser</P>
+<P STYLE="margin-bottom: 0in">	<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>Police_console_verte</FONT></FONT></FONT><FONT COLOR="#00b050">
+</FONT>= commande à taper</P>
+<P STYLE="margin-bottom: 0in">	<FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2>Police_console_violette</FONT></FONT></FONT><FONT COLOR="#7030a0">
+</FONT>= en mode texte (nano par exemple)</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Objectifs&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Mise en place d’<FONT COLOR="#000000"><FONT FACE="Verdana, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN STYLE="background: #ffffff">
+	un système permettant de gérer une grande quantité de données de
+	manière distribuée</SPAN></FONT></FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Verdana, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN STYLE="background: #ffffff">Disposer
+	de bases de données hautement scalable sur un grand nombre de
+	serveurs tout en ne présentant pas de&nbsp;</SPAN></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Verdana, serif"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN STYLE="background: #ffffff">Single
+	Point Of Failure (SPOF)</SPAN></FONT></FONT></FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Version&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Cassandra 3.6</P>
+	<LI><P STYLE="margin-bottom: 0in">Python 2.7.10</P>
+	<LI><P STYLE="margin-bottom: 0in">Java 8</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Références&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="http://cassandra.apache.org/doc/latest/getting_started/installing.html">http://cassandra.apache.org/doc/latest/getting_started/installing.html</A></P>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="https://www.digitalocean.com/community/tutorials/how-to-install-cassandra-and-run-a-single-node-cluster-on-ubuntu-14-04">https://www.digitalocean.com/community/tutorials/how-to-install-cassandra-and-run-a-single-node-cluster-on-ubuntu-14-04</A></P>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="https://github.com/linux-on-ibm-z/docs/wiki/Building-Apache-Cassandra-3.10">https://github.com/linux-on-ibm-z/docs/wiki/Building-Apache-Cassandra-3.10</A></P>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="http://docs.datastax.com/en/cassandra/3.0/cassandra/install/installDeb.html">http://docs.datastax.com/en/cassandra/3.0/cassandra/install/installDeb.html</A></P>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="https://www.digitalocean.com/community/tutorials/how-to-install-cassandra-and-run-a-single-node-cluster-on-a-ubuntu-vps">https://www.digitalocean.com/community/tutorials/how-to-install-cassandra-and-run-a-single-node-cluster-on-a-ubuntu-vps</A></P>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="http://docs.datastax.com/en/cassandra/3.0/cassandra/initialize/initSingleDS.html">http://docs.datastax.com/en/cassandra/3.0/cassandra/initialize/initSingleDS.html</A></P>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="https://www.digitalocean.com/community/tutorials/how-to-run-a-multi-node-cluster-database-with-cassandra-on-ubuntu-14-04">https://www.digitalocean.com/community/tutorials/how-to-run-a-multi-node-cluster-database-with-cassandra-on-ubuntu-14-04</A></P>
+	<LI><P STYLE="margin-bottom: 0in"></P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Prérequis / Architecture&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">OS&nbsp;:</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">Ubuntu 16.04</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Ports principaux&nbsp;du serveur
+Cassandra :</U></P>
+<CENTER>
+	<TABLE WIDTH=538 CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=90>
+		<COL WIDTH=80>
+		<COL WIDTH=326>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">7000 
+				</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">Cluster</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">7001</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">Cluster SSL</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">9042</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">Protocol natif client</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">9142</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">Protocol natif client SSL</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">7199</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">JMX</P>
+			</TD>
+		</TR>
+	</TABLE>
+</CENTER>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Présentation de
+	Cassandra</H1>
+</OL>
+<P STYLE="margin-bottom: 0in">Une <B>colonne</B> dans Cassandra
+contient un nom, une valeur et un timestamp.</P>
+<P STYLE="margin-bottom: 0in">Le timestamp est la date à laquelle la
+valeur a été écrite dans le nœud, et c'est cette valeur que l'on
+va utiliser pour réguler la cohérence des données.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Un <B>nœud</B> (node) : il s'agit de
+la plus petite entité du cluster. C'est un serveur physique qui
+contiendra les différentes données de la base.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Un <B>centre de données</B>
+(Data-Center) : c'est un ensemble de nœuds qui sont dans un
+environnement géographique proche. Logiquement parlant, les nœuds
+peuvent communiquer plus facilement car ils sont censés être sur un
+réseau local.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Un <B>cluster</B> : le cluster est un
+ensemble de data-centers où seront copiées les différentes données
+du système. En général, on ne définit qu'un seul keyspace par
+cluster. (le keyspace est l'équivalent du schéma en base de données
+relationnelle).</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Il existe 3 notions fondamentales en
+<B>clusterisation</B> :</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">La cohérence (consistency) C</P>
+	<LI><P STYLE="margin-bottom: 0in">La disponibilité (availability) A</P>
+	<LI><P STYLE="margin-bottom: 0in">La résistance au morcellement
+	(partition tolerance) P</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Il est pertinent d'utiliser Cassandra
+pour un système :</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><B>Décentralisé</B> : La base
+	doit être distribuée. Les données ne seront pas centralisées en
+	un seul et même serveur. Il y aura donc un cluster, ce cluster
+	permettra de gérer la scalabilité du système. En effet, le volume
+	de données contenu au sein du cluster peut être amené à évoluer
+	rapidement et il est important que l'architecture mise en place
+	puisse s'adapter à ses évolutions.</P>
+	<LI><P STYLE="margin-bottom: 0in"><B>Tolérant aux pannes</B> :
+	L'accès aux données doit être garanti même en cas de pannes.
+	Cassandra permet de paramétrer finement cette tolérance aux
+	pannes.</P>
+	<LI><P STYLE="margin-bottom: 0in"><B>Hautement Disponible</B> : La
+	base doit être accessible par n'importe quel utilisateur à
+	n'importe quel moment (même en cas de pics d'utilisation du
+	système).</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Cassandra est particulièrement adaptée
+aux bases devant gérer une forte demande côté clients ainsi qu'une
+haute fréquence de lectures/écritures.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Quelques <B>exemples d'entreprises</B>
+utilisant Cassandra (d'après le site d'Apache Cassandra) :</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Apple, avec plus de 75 000 noeuds,
+	et 10 PB de données (10 000 000 Giga).</P>
+	<LI><P STYLE="margin-bottom: 0in">Netflix, avec 2 500 noeuds, 420 TB
+	de données, et 1000 milliards de requêtes par jour.</P>
+	<LI><P STYLE="margin-bottom: 0in">Ebay, 100 noeuds, 250 TB de
+	données.</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Un cluster peut contenir plusieurs
+<B>Keyspaces</B>.</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Un Keyspace est l'équivalent d'un
+	schéma dans une BDD relationnelle.</P>
+	<LI><P STYLE="margin-bottom: 0in">Chaque Keyspace peut être
+	paramétré de manière indépendante.</P>
+	<LI><P STYLE="margin-bottom: 0in">Les paramètres rentrant en jeu
+	sont le Replication Factor (RF) et le Consistency Level (CL).</P>
+	<LI><P STYLE="margin-bottom: 0in">Ces paramètres permettent de
+	gérer la disponibilité (A) et la résistance au morcellement (P)
+	de Cassandra.</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><B>Principe fondamental</B> d'un
+cluster : Il n'y a pas de nœud maître dans un cluster, ils sont
+tous au même niveau. De ce fait, lorsque qu'un client veut lire ou
+écrire une donnée, il lui suffit de se connecter à l'un des nœuds
+du cluster, si le nœud en question ne contient pas la donnée, alors
+il la demandera au nœud qui la contient. Ce mécanisme est
+transparent pour le client.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Comment Cassandra décide <B>quels
+nœuds</B> ont quelles données ?</P>
+<P STYLE="margin-bottom: 0in">L’ensemble des nœuds (un nœud
+unique, le cas échéant, ou plusieurs) responsable(s) d’une donnée
+ou d’un groupe de données est déterminé par :</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">la clef de l’enregistrement (les
+	données sont partitionnées sur ces clefs)</P>
+	<LI><P STYLE="margin-bottom: 0in">le facteur de réplication (décide
+	du nombre de nœuds qui ont une réplique d’une ligne donnée)</P>
+	<LI><P STYLE="margin-bottom: 0in">la stratégie de réplication (qui
+	décide quels nœuds hébergent ladite réplique)</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Dans le cas d’une
+NetworkTopologyStrategy, le placement est affecté par la
+connaissance topologique qu’a le cluster de ses data centers et
+châssis (racks), et le placement va dépendre de la façon dont les
+nœuds des différents châssis et data centers sont placés sur
+l’anneau.</P>
+<P STYLE="margin-bottom: 0in">Il est important de comprendre que
+Cassandra ne modifie pas le jeu de répliques en fonction de
+l'évolution des caractéristiques, comme la charge actuelle des
+divers nœuds, les nœuds actifs ou inactifs, ou le nœud particulier
+avec lequel votre client parle.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=2>
+	<LI><H1 CLASS="western">Définition</H1>
+</OL>
+<H2 CLASS="western">NetworkTopology 
+</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Les &quot;keyspace&quot; (équivalent
+d'une base de données) sont crées selon une stratégie. il en
+existe deux : &quot;SimpleStrategy&quot; et &quot;NetworkTopology&quot;.
+Dans un contexte de production, il faut choisir la stratégie
+&quot;NetworkTopology&quot;</P>
+<P STYLE="margin-bottom: 0in">Elle est fortement recommandée car
+elle permet d'étendre facilement le nombre de datacenter
+(regroupement de nœuds)</P>
+<P STYLE="margin-bottom: 0in">NetworkTopologyStrategy : à utiliser
+lorsque le cluster est déployé sur plusieurs data-centers. Cette
+stratégie permet de spécifier le nombre de copies voulu dans chaque
+data-center, elle permet également de placer les copies sur des
+racks distincts car les noeuds d'une même rack rencontre souvent
+simultanément des problèmes d'alimentation, de refroidissement ou
+de réseau.</P>
+<P STYLE="margin-bottom: 0in">Elle spécifie la façon dont les
+&quot;réplicas&quot; (copies des données sur de multiples nœuds
+pour permettre fiabilité et tolérance de panne) sont répartis dans
+un keyspace et spécifie leur nombre dans chaque datacenter</P>
+<P STYLE="margin-bottom: 0in">Le fonctionnement : &quot;NetworkTopology&quot;
+transmet les &quot;réplicas&quot; au datacenter concerné en
+parcourant l'anneau du datacenter dans le sens d'une aiguille d'une
+montre jusqu'à atteindre le premier nœud d'un autre rack. Pour une
+meilleure tolérance, il faut que les réplicas soient placés dans
+des racks distincts.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<H2 CLASS="western"><A NAME="_Toc499716027"></A>Le facteur de
+réplicas (RF)</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Le Replication Factor correspond au
+nombre de copies d'une donnée au sein des nœuds du cluster.</P>
+<P STYLE="margin-bottom: 0in">Le Replication Factor doit forcément
+être inférieur ou égal au nombre de nœuds du cluster.</P>
+<P STYLE="margin-bottom: 0in">Il spécifie le nombre de copie
+(réplicas) de chaque ligne d'une keyspace dans un cluster :</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">pour un RF de 1, il y a une seule
+	copie de chaque ligne</P>
+	<LI><P STYLE="margin-bottom: 0in">pour un RF de 2, il y a deux
+	copies de chaque ligne</P>
+	<LI><P STYLE="margin-bottom: 0in">etc ...</P>
+</UL>
+<P STYLE="margin-bottom: 0in">Il est important de préciser que le RF
+ne doit pas dépasser le nombre de nœuds dans un cluster. (si nous
+ajoutons des nœuds, il faut augmenter le RF )</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<H2 CLASS="western"><A NAME="_Toc499716028"></A>Niveau de Cohérence
+/ Consistency Level (CL)</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Les données peuvent être copiées sur
+plusieurs nœuds au sein du cluster. Cassandra utilise un paramètre
+de cohérence pour gérer la cohérence des données. 
+</P>
+<P STYLE="margin-bottom: 0in">Elle permet de trouver le juste milieu
+entre le temps d'exécution d'une requête et le temps d'acquittement
+d'une écriture (confirmation qu'une écriture s'est bien faite)</P>
+<P STYLE="margin-bottom: 0in">Lors d'une écriture, le niveau de
+consistance précise sur combien de réplicas doit être écrite la
+donnée avant d'être acquitté du succès de l'opération</P>
+<P STYLE="margin-bottom: 0in">Lors d'une lecture, le niveau de
+consistance précise combien de réplicas doivent répondre avant que
+le résultat ne soit fourni au client</P>
+<P STYLE="margin-bottom: 0in">Il existe plusieurs niveaux de
+&quot;consistance&quot; :</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Any : un seul réplica doit
+	répondre. A uniquement utiliser pour les opération d'écriture 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">One : un seul réplica doit
+	répondre. un seul nœud est consulté / l'écriture est validée
+	après écriture sur un seul nœud.</P>
+	<LI><P STYLE="margin-bottom: 0in">Two : seulement deux réplicas
+	doivent répondre</P>
+	<LI><P STYLE="margin-bottom: 0in">Three : seulement trois réplicas
+	doivent répondre 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Quorum : calculer selon la méthode
+	calcul  &quot;n/2 +1&quot;. c'est à dire &quot;n/2 +1&quot; des
+	réplicas doivent répondre. (RF/2) +1 nœuds sont consultés /
+	l'écriture est validée après écriture sur (RF/2) +1 nœuds.</P>
+	<LI><P STYLE="margin-bottom: 0in">Local_Quorum : une majorité des
+	réplicas du datacenter doivent répondre (&quot;local datacenter&quot;)</P>
+	<LI><P STYLE="margin-bottom: 0in">Each_Quorum : une majorité des
+	réplicas dans chaque datacenter doivent répondre 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Local_One : un seul réplica doit
+	répondre au sein du même datacenter -&gt; dans une configuration
+	avec plusieurs datacenters, cela garantit que les requêtes en
+	lecture ne sont pas transmises aux datacenters distants 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">All : tous les réplicas doivent
+	répondre. RF nœuds sont consultés / l'écriture est validée
+	après écriture sur RF nœuds</P>
+</UL>
+<P STYLE="margin-bottom: 0in">Plus on descend sur l'échelle des
+niveaux de &quot;consistance&quot; (de ANY vers ALL), plus la
+réplication est élevée(plus il y a de copies).</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">READ level : Le niveau de cohérence en
+lecture détermine le nombre de nœuds devant être interrogés par
+le Cluster avant que celui-ci ne retourne la donnée suite à la
+demande de lecture du client.</P>
+<P STYLE="margin-bottom: 0in">WRITE Level : Le niveau de cohérence
+en écriture détermine le nombre de nœuds sur lesquels doit être
+écrit la donnée avant de valider l''écriture faite par le client</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<H2 CLASS="western">Quorum</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Il permet de déterminer le niveau de
+&quot;consistance&quot;</P>
+<P STYLE="margin-bottom: 0in">Un quorum est calculé de cette façon
+:</P>
+<P STYLE="margin-bottom: 0in">o	Quorum = (RF : 2) + 1</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Petits calculs (à vérifier ...) + 
+(inspiré du site développez.com) +  (rappel : &quot;RF&quot; =
+nombre de copie (réplicas) de chaque ligne d'une keyspace)</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">RF de 3   : quorum=2, 1 réplica
+	peut être indisponible</P>
+	<LI><P STYLE="margin-bottom: 0in">RF de 6   : quorum=4, 2 réplicas
+	peuvent être indisponibles</P>
+	<LI><P STYLE="margin-bottom: 0in">Deux datacenters qui ont chacun
+	d'eux un RF de 3 (donc un RF de 6 au total) : quorum=4, 2 réplicas
+	peuvent être indisponibles</P>
+	<LI><P STYLE="margin-bottom: 0in">Cinq datacenters dont deux
+	datacenters ont un RF de 3, et trois  datacenters ont un RF de 2
+	(donc un RF de ? au total) : quorum=7, 5 réplicas peuvent être
+	indisponibles</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<H2 CLASS="western"><A NAME="_Toc499716030"></A>Impact CL et RF sur
+les performances</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">La lecture pour le client</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Pour les valeurs de CL :</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">ONE : Une augmentation du RF
+		améliore les performances en lecture du point de vue du client. Il
+		y a plus de chance que le client demande la donnée à un nœud qui
+		la contient et donc cette dernière serait retournée plus
+		rapidement. GAIN</P>
+		<LI><P STYLE="margin-bottom: 0in">QUORUM/ALL : Une augmentation du
+		RF augmenterai le nombre de nœuds devant être consultés avant
+		que la donnée ne soit retournée, ce qui augmente le temps de
+		réponse. PERTE</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in">L'écriture pour le client</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Pour les valeurs de CL :</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">ONE : Une augmentation du RF
+		n'impacte pas le temps mis par le cluster à valider l'écriture du
+		client. (le nœud sur lequel la donnée va être écrite dépend de
+		la clé de partition et non du RF). IDEM</P>
+		<LI><P STYLE="margin-bottom: 0in">QUORUM/ALL : Une augmentation du
+		RF augmenterai le nombre de nœuds devant valider l'écriture de la
+		donnée avant que la validation d'écriture ne soit retournée au
+		client, ce qui augmente le temps de réponse. PERTE</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Pour le cluster : 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Une augmentation du CL se traduit
+	par davantage de communication inter-nœuds. PERTE</P>
+	<LI><P STYLE="margin-bottom: 0in">Une augmentation du RF diminue la
+	communication inter-nœuds en lecture. GAIN</P>
+	<LI><P STYLE="margin-bottom: 0in">Une augmentation du RF augmente la
+	communication inter-nœuds en écriture. PERTE</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Bilan :</P>
+<P STYLE="margin-bottom: 0in">•	Il est donc fondamental de
+connaître le domaine d'application du cluster</P>
+<P STYLE="margin-bottom: 0in">•	S'il est important que le client
+ait une réponse extrêmement rapide même s'il la réponse peut être
+erronée alors un RF élevé et un CL à ONE semblent être
+appropriés</P>
+<P STYLE="margin-bottom: 0in">•	S'il est important que le client
+ait une réponse rapide même s'il la réponse peut être erronée
+alors un RF faible et un CL à ONE semblent être appropriés</P>
+<P STYLE="margin-bottom: 0in">•	S'il est important que le client
+ait une réponse extrêmement fiable quitte à être lente alors un
+RF élevé et un CL à ALL semblent être appropriés</P>
+<P STYLE="margin-bottom: 0in">•	Plus la tolérance aux pannes doit
+être faible, plus le RF doit être important et le CL faible</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<H2 CLASS="western"><A NAME="_Toc499716031"></A>&quot;Snitch&quot;</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Il permet de déterminer à quels
+datacenters ou racks appartiennent les nœuds</P>
+<P STYLE="margin-bottom: 0in">La manière dont les nœuds sont
+groupés ensemble dans la topologie du réseau local.</P>
+<P STYLE="margin-bottom: 0in">Le Snitch permet à Cassandra de router
+les requêtes entre les nœuds.</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Dynamic snithing : contrôle les
+	performances en lecture des réplicas et choisis le meilleur</P>
+	<LI><P STYLE="margin-bottom: 0in">SimpleSnitch : uniquement utilisé
+	dans une configuration d'un seul datacenter</P>
+	<LI><P STYLE="margin-bottom: 0in">RackInferringSnitch : définit la
+	localisation des nœuds en fonction de leur appartenance à un
+	datacenter et rack par rapport à leur adresse IP</P>
+	<LI><P STYLE="margin-bottom: 0in">PropertyfileSnitch : définit la
+	localisation des nœuds en fonction de leur appartenance à un
+	datacenter et rack</P>
+	<LI><P STYLE="margin-bottom: 0in">GossipPropertyFileSnitch :
+	effectue les mise à jour de tous les nœuds en utilisant le
+	protocole &quot;gossip&quot; (celui de Cassandra (= peer to peer
+	entre les nœuds)) lorsque de nouveaux nœuds sont ajoutés. Celui
+	est recommandé dans un environnement de production</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<H2 CLASS="western"><A NAME="_Toc499716032"></A>SSTables</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">SSTables : les données sont mises en
+mémoire et écrites périodiquement sur le disque dans une structure
+appelée une SSTable (Sorted String Table)</P>
+<P STYLE="margin-bottom: 0in">Les SSTables ne sont pas des données
+mais contiennent les données.</P>
+<P STYLE="margin-bottom: 0in">Les étapes successives pour
+l'enregistrement des données dans Cassandra :</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">&quot;Commitlog&quot; pour
+	journaliser les évènements (permet de garantir que le donnée
+	reçue par le cluster ne sera pas perdue)</P>
+	<LI><P STYLE="margin-bottom: 0in">&quot;Memtable&quot; pour rendre
+	la donnée disponible le plus rapidement possible (une structure
+	temporaire)</P>
+	<LI><P STYLE="margin-bottom: 0in">&quot;SSTable&quot; pour rendre la
+	donnée consistante dans le temps (donc probablement une structure
+	pérenne)</P>
+	<LI><P STYLE="margin-bottom: 0in">&quot;Compaction&quot; pour
+	optimiser le rangement des données</P>
+</UL>
+<P STYLE="margin-bottom: 0in"> 
+</P>
+<P STYLE="margin-bottom: 0in">Pour aller plus loin &gt;&gt; «
+Commitlog », « Memtable », « SSTable » et « Compaction » :</P>
+<P STYLE="margin-bottom: 0in">Cassandra est optimisé pour permettre
+une écriture rapide et hautement disponible des données avec un
+débit élevé. Pour ce faire, les données sont écrites dans un
+premier temps dans un journal de commit (pour s’assurer de la
+durabilité), puis dans une structure en mémoire appelé la
+Memtable. Une écriture est considérée comme ayant réussi si les
+deux actions précédentes ont réussis. Cela permet d’avoir peu
+d’entrée/sortie disque au moment de l’écriture. Ainsi, les
+données sont mises en mémoire et périodiquement écrite sur le
+disque dans une structure appelé une SSTable (pour Sorted String
+Table). Les Memtables et SSTables sont maintenus par famille de
+colonnes : les Memtables sont organisées de manière ordonné par
+clé de ligne et sont flushé dans les SSTables séquentiellement.</P>
+<P STYLE="margin-bottom: 0in">A noter également que les SSTables
+sont immuables, ce qui signifie qu’une ligne peut, typiquement,
+être stockée dans plusieurs fichiers de SSTable. Ainsi, pour
+répondre à une requête de lecture, il est nécessaire de combiner
+toutes les SSTables se trouvant sur le disque pour trouver la valeur
+d’une ligne. Pour optimiser ce processus, Cassandra utilise un
+structure en mémoire appelé Bloom Filter : chaque SSTable dispose
+de son propre Bloom Filter qui est utilisé pour vérifier si la clé
+d’une ligne existe lors d’une requête.</P>
+<P STYLE="margin-bottom: 0in">Périodiquement, les lignes stockées
+en mémoire sont diffusées sur disque dans des structures appelées
+SSTables. À certains intervalles, Cassandra compacte les plus petits
+SSTables en plus grands SSTables. Si Cassandra rencontre deux ou
+plusieurs versions de la même ligne au cours de ce processus,
+Cassandra écrit uniquement la version la plus récente dans le
+nouveau SSTable. Après compactage, Cassandra supprime les SSTables
+d'origine, en supprimant les lignes obsolètes. Ce processus est
+appelé Compaction. Plus précisément, il regroupe les fragments de
+lignes ensemble, supprime les colonnes qui ont été marquées comme
+devant être supprimé et reconstruit les index primaires et
+secondaires. Bien sûr, ce processus a des impacts sur les disk I/O.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=3>
+	<LI><H1 CLASS="western">La gestion des données</H1>
+</OL>
+<H2 CLASS="western">L’ajout / suppression d’une ligne</H2>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Dans Cassandra,
+une opération d'écriture est atomique au niveau de la partition, ce
+qui signifie que les insertions ou les mises à jour de deux ou
+plusieurs lignes dans la même partition sont traitées comme une
+opération d'écriture. Une opération de suppression est également
+atomique au niveau de la partition.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Cassandra traite
+chaque nouvelle ligne comme un relèvement : si la nouvelle ligne a
+la même clé primaire que celle d'une ligne existante, Cassandra la
+traite comme une mise à jour de la ligne existante.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Pendant une
+écriture, Cassandra ajoute chaque nouvelle ligne à la base de
+données sans vérifier si un enregistrement en double existe. Cette
+stratégie permet à plusieurs versions de la même ligne d'exister
+dans la base de données.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">La plupart des
+installations de Cassandra stockent des répliques de chaque ligne
+sur deux nœuds ou plus. Chaque noeud effectue le compactage
+indépendamment. Cela signifie que même si des versions obsolètes
+d'une ligne ont été supprimées d'un nœud, elles peuvent toujours
+exister sur un autre nœud.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">C'est pourquoi
+Cassandra effectue une autre ronde de comparaisons au cours d'un
+processus de lecture. Lorsqu'un client demande des données avec une
+clé primaire particulière, Cassandra récupère plusieurs versions
+de la ligne à partir d'une ou de plusieurs répliques. La version
+avec l'horodatage le plus récent est la seule renvoyée au client.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Dans Cassandra,
+le protocole de consensus Paxos est utilisé pour implémenter des
+transactions allégées pouvant gérer des opérations simultanées.
+les conditions de concurrence entre deux écritures potentielles
+doivent être réglées pour s'assurer que l'une précède l'autre.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">	Cassandra traite
+une suppression comme insertion ou upsert. Les données ajoutées à
+la partition dans la commande DELETE sont un marqueur de suppression
+appelé une pierre tombale (« tombstone »). Les pierres tombales
+passent par le chemin d'écriture de Cassandra et sont écrites dans
+SSTables sur un ou plusieurs nœuds. La caractéristique de
+différence clé d'une pierre tombale : il a une date / heure
+d'expiration intégrée. À la fin de sa période d'expiration, la
+pierre tombale est supprimée dans le cadre du processus de
+compactage normal de Cassandra.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">	Dans un cluster
+à plusieurs nœuds, Cassandra peut stocker des réplicas des mêmes
+données sur deux nœuds ou plus. Cela permet d'éviter la perte de
+données, mais complique le processus de suppression. Si un nœud
+reçoit une suppression pour les données qu'il stocke localement, le
+nœud supprime l'enregistrement spécifié et tente de transmettre la
+pierre tombale à d'autres nœuds contenant des répliques de cet
+enregistrement. Mais si un noeud de réplique ne répond pas à ce
+moment, il ne reçoit pas la pierre tombale immédiatement, donc il
+contient toujours la version de pré-suppression de l'enregistrement.
+Si l'enregistrement désactivé a déjà été supprimé du reste de
+la grappe avant que ce noeud ne récupère, Cassandra traite
+l'enregistrement sur le noeud récupéré comme de nouvelles données
+et le propage au reste du cluster. Ce type d'enregistrement supprimé
+mais persistant s'appelle un zombie.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Les écritures à
+Cassandra sont durables. Toutes les écritures sur un noeud de
+réplique sont enregistrées à la fois dans la mémoire et dans un
+journal de validation sur disque avant d'être reconnues comme un
+succès. Si un crash ou une panne de serveur se produit avant que les
+memtables soient vidées sur le disque, le journal de validation est
+relu au redémarrage pour récupérer toutes les écritures perdues.
+En plus de la durabilité locale (données immédiatement écrites
+sur le disque), la réplication des données sur d'autres nœuds
+renforce la durabilité.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Il est possible
+de gérer la durabilité locale en fonction de vos besoins pour la
+cohérence en utilisant l'option commitlog_sync dans le fichier
+cassandra.yaml. Définissez l'option sur périodique ou par lot. </P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<H2 CLASS="western">Lecture de donnée</H2>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Pour satisfaire
+une lecture, Cassandra doit combiner les résultats de la memtable
+active et potentiellement plusieurs SSTables.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Cassandra traite
+les données à plusieurs étapes sur le chemin de lecture pour
+découvrir où les données sont stockées, en commençant par les
+données dans la memtable et en terminant par SSTables:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vérifiez la
+	memtable</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vérifier le
+	cache de ligne, s'il est activé</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vérifie le
+	filtre Bloom</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vérifie le
+	cache de clé de partition, s'il est activé</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Va
+	directement à la carte de décalage de compression si une clé de
+	partition est trouvée dans le cache de clé de partition, ou sinon
+	vérifie le résumé de la partition. Si le résumé de la partition
+	est cochée, l'index de la partition est accessible</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Localise les
+	données sur le disque en utilisant la carte de décalage de
+	compression</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Récupère
+	les données du fichier SSTable sur le disque</P>
+</UL>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Comment les
+demandes de lecture sont-elles accomplies? Si plusieurs nœuds sont
+contactés, si les lignes ne sont pas cohérentes, la réplique ayant
+les données les plus récentes (en fonction de l'horodatage) est
+utilisée par le coordinateur pour renvoyer les résultats au client.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<H2 CLASS="western">La cohérence pour l’écriture et la lecture</H2>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">La fiabilité des
+opérations de lecture et d'écriture dépend de la cohérence
+utilisée pour vérifier l'opération. 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">R est le
+	niveau de cohérence des opérations de lecture</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">W est le
+	niveau de cohérence des opérations d'écriture</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">N est le
+	nombre de répliques</P>
+</UL>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Une forte
+cohérence peut être garantie lorsque la condition suivante est
+vraie : R + W &gt; N</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Si le facteur de
+réplication est 3, le niveau de cohérence des lectures et écritures
+combinées doit être au moins de 4. Par exemple, lisez des
+opérations en utilisant 2 réplicas sur 3 pour vérifier la valeur
+et écrivez des opérations en utilisant 2 réplicas sur 3 pour
+vérifier la valeur entraînera une forte cohérence. Si des
+opérations d'écriture rapide sont requises, mais qu'une cohérence
+forte est toujours souhaitée, le niveau de cohérence d'écriture
+est réduit à 1, mais les opérations de lecture doivent maintenant
+vérifier une valeur correspondante sur les trois réplicas. Les
+écritures seront rapides, mais les lectures seront plus lentes.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Une cohérence
+éventuelle se produit si la condition suivante est vraie : R + W = &lt;
+N</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Si le facteur de
+réplication est 3, le niveau de cohérence des lectures et écritures
+combinées est 3 ou moins. Par exemple, lire des opérations en
+utilisant QUORUM (2 répliques sur 3) pour vérifier la valeur et
+écrire des opérations en utilisant ONE (1 réplique sur 3) pour
+effectuer des écritures rapides entraînera une cohérence
+éventuelle. Toutes les répliques recevront les données, mais les
+opérations de lecture sont plus vulnérables à la sélection des
+données avant que toutes les répliques écrivent les données.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Exemples de
+cohérence supplémentaires:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vous écrivez
+	à ONE, la réplique plante une seconde plus tard. Les autres
+	messages ne sont pas livrés. Les données sont perdues.</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vous écrivez
+	à ONE et l'opération expire. Les lectures futures peuvent renvoyer
+	l'ancienne ou la nouvelle valeur. Vous ne saurez pas que les données
+	sont incorrectes.</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vous écrivez
+	à ONE, et l'une des autres répliques est en panne. Le noeud
+	revient en ligne. L'application récupère les anciennes données de
+	ce noeud jusqu'à ce que le noeud obtienne les données correctes ou
+	qu'une réparation en lecture se produise.</P>
+	<LI><P STYLE="margin-bottom: 0.11in; line-height: 107%">Vous écrivez
+	à QUORUM, puis vous lisez QUORUM. L'une des répliques meurt. Vous
+	obtiendrez toujours les bonnes données.</P>
+</UL>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Par exemple, si
+vous utilisez un niveau de cohérence en écriture de QUORUM avec un
+facteur de réplication de 3, Cassandra répliquera l'écriture à
+tous les nœuds du cluster et attendra l'acquittement de deux nœuds.
+Si l'écriture échoue sur l'un des noeuds mais réussit de l'autre,
+Cassandra signale un échec de réplication de l'écriture sur ce
+noeud. Toutefois, l'écriture répliquée qui réussit sur l'autre
+nœud n'est pas automatiquement annulée.</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%">Cassandra utilise
+des horodatages côté client pour déterminer la mise à jour la
+plus récente d'une colonne. Le dernier horodatage gagne toujours
+lors de la demande de données. Ainsi, si plusieurs sessions client
+mettent simultanément à jour les mêmes colonnes d'une même ligne,
+la mise à jour la plus récente est celle vue par les lecteurs.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=4>
+	<LI><H1 CLASS="western">Mise à jour du serveur</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">apt-get
+update &amp;&amp; apt-get upgrafe</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=5>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Installation de Java</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+ufw disable</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+add-apt-repository ppa:webupd8team/java</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get update</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+dpkg --configure -a</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">apt-get
+-f install -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get install oracle-java8-set-default -y</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=6>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Installation de Java</H1>
+</OL>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">sudo
+apt purge python3.5 -y &amp;&amp; sudo apt purge python3.5-minimal -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">sudo
+apt autoremove -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">apt
+install python-pip -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">pip
+install cassandra-driver</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">pip
+install --upgrade pip</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mkdir
+-p /home/install</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cd
+/home/install</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">wget
+https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">tar
+-zxvf  Python-2.7.10.tgz</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get install build-essential checkinstall -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get install libreadline-gplv2-dev libncursesw5-dev libgdbm-dev
+libc6-dev libbz2-dev  libsqlite3-dev tk-dev libssl-dev -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cd
+Python-2.7.10/</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+./configure</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+make altinstall</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">whereis
+python2.7</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">python
+--version</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">export
+CQLSH_NO_BUNDLED=TRUE</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=7>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Installation de
+	Cassandra</H1>
+</OL>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">echo
+&quot;deb http://www.apache.org/dist/cassandra/debian 36x main&quot;
+| sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">curl
+https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get update</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get install cassandra -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">sudo
+service cassandra stop</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">chmod
+777 /var/lib/cassandra</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">chmod
+777 /var/log/cassandra</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">sudo
+ufw disable</SPAN></FONT></FONT></FONT></P>
+<P LANG="es-ES" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="es-ES" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="es-ES" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=8>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Configuration de
+	Cassandra</H1>
+</OL>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">export
+CQLSH_NO_BUNDLED=TRUE</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="it-IT">sudo
+service cassandra stop</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">sudo
+rm -rf /var/lib/cassandra/*</SPAN></FONT></FONT></FONT></P>
+<P LANG="sv-SE" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="sv-SE" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Modification du fichier de
+configuration de Cassandra «&nbsp;cassandra.yaml&nbsp;»</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/cassandra/cassandra.yaml</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000">indiquer le nom
+du cluster concerné -&gt; 	</FONT><FONT COLOR="#ff0000">		</FONT><FONT COLOR="#7030a0">	</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000">indiquer les
+adresses IP des seeds du cluster -&gt;	</FONT><FONT COLOR="#ff0000">	</FONT><FONT COLOR="#7030a0">	</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000">ajouter à la fin
+-&gt;</FONT><FONT COLOR="#ff0000">					</FONT><FONT COLOR="#7030a0">auto_bootstrap:
+false</FONT><FONT COLOR="#ff0000">		</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000">indiquer les IP
+de broadcast rpc -&gt; </FONT><FONT COLOR="#ff0000">		</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000">indiquer l’IP
+rpc	 -&gt;	</FONT><FONT COLOR="#ff0000">				</FONT><FONT COLOR="#7030a0">0.0.0.0</FONT><FONT COLOR="#ff0000">		</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#ff0000">		</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#ff0000">		</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/cassandra/cassandra-env.sh</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#ff0000">ajouter à la fin
+-&gt;				</FONT><FONT COLOR="#7030a0">'JVM_OPTS=&quot;$JVM_OPTS
+-Djava.rmi.server.hostname=127.0.0.1&quot;</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000">Définir les
+datacenters et les racks&nbsp;:</FONT><FONT COLOR="#7030a0">	</FONT><FONT COLOR="#ff0000">	</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="it-IT">nano
+/etc/cassandra/cassandra-rackdc.properties</SPAN></FONT></FONT></FONT></P>
+<P LANG="it-IT" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="it-IT" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#ff0000"><SPAN LANG="en-US">echo
+&quot;export CQLSH_NO_BUNDLED=TRUE&quot; &gt;&gt; /etc/bash.bashrc</SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">export
+CQLSH_NO_BUNDLED=TRUE</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000">mise à jour de
+Cassandra&nbsp;:</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="sv-SE">sudo
+rm -rf /var/lib/cassandra/*</SPAN></FONT></FONT></FONT></P>
+<P LANG="sv-SE" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="sv-SE" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="sv-SE" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=9>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Installation de
+	Sparks</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nl-NL">cd
+/root</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">wget
+https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.7.tgz</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">tar
+xvf spark-2.2.0-bin-hadoop2.7.tgz</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">mv
+spark-2.2.0-bin-hadoop2.7 /opt/</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">ln
+-s spark-2.2.0-bin-hadoop2.7.tgz spark</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">export
+PATH=/opt/spark/bin:$PATH</SPAN></FONT></FONT></FONT></P>
+<P LANG="da-DK" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="da-DK" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=10>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Installation du
+	connecteur pour Cassandra</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>git
+clone https://github.com/datastax/spark-cassandra-connector.git</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cd
+spark-cassandra-connector</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>git
+checkout v1.4.0</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>echo
+&quot;deb https://dl.bintray.com/sbt/debian /&quot; | sudo tee -a
+/etc/apt/sources.list.d/sbt.list</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv
+2EE0EA64E40A89B84B2DF73499E82A75642AC823</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get update</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+apt-get install sbt</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Désormais, il faut patienter environ
+10 minutes</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sbt
+assembly</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mkdir
+-p /opt/spark/connector</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cd
+/root/</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mv
+spark-cassandra-connector /opt/spark/connector</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mkdir
+/opt/spark/conf/</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cp
+/opt/spark-2.2.0-bin-hadoop2.7/bin/load-spark-env.sh /opt/spark/conf/</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><FONT COLOR="#ff0000"><SPAN LANG="en-US">echo
+&quot;SPARK_MASTER_HOST='$adip'&quot; &gt;&gt; 
+/opt/spark-2.2.0-bin-hadoop2.7/bin/load-spark-env.sh</SPAN></FONT></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">echo
+&quot;SPARK_CLASSPATH=/opt/spark/connector/*&quot; &gt;&gt; 
+/opt/spark-2.2.0-bin-hadoop2.7/bin/load-spark-env.sh</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cp
+/opt/spark/connector/spark-cassandra-connector/spark-cassandra-connector/target/scala-2.10/spark-cassandra-connector-assembly-1.4.0-SNAPSHOT.jar
+/opt/spark/connector/spark-cassandra-connector/</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cd
+/opt/spark/connector/spark-cassandra-connector/</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">wget
+http://central.maven.org/maven2/com/datastax/spark/spark-cassandra-connector_2.11/2.0.0/spark-cassandra-connector_2.11-2.0.0.jar</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">wget
+http://central.maven.org/maven2/com/datastax/spark/spark-cassandra-connector_2.11/2.0.0/spark-cassandra-connector_2.11-2.0.0.pom</SPAN></FONT></FONT></FONT></P>
+<P LANG="da-DK" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="da-DK" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=11>
+	<LI><H1 CLASS="western">Exécution de scala via le connecteur</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">/opt/spark-2.2.0-bin-hadoop2.7/bin/spark-shell
+--jars
+/opt/spark/connector/spark-cassandra-connector/spark-cassandra-connector_2.11-2.0.0.jar</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">OU</SPAN></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>/opt/spark-2.2.0-bin-hadoop2.7/bin/spark-shell
+--jars
+/opt/spark/connector/spark-cassandra-connector/spark-cassandra-connector_2.11-2.0.0.jar</FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+</BODY>
+</HTML>

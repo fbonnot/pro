@@ -1,0 +1,1756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
+	<META NAME="AUTHOR" CONTENT="BONNOT Fabrice">
+	<META NAME="CREATED" CONTENT="20180703;73100000000000">
+	<META NAME="CHANGEDBY" CONTENT="BONNOT Fabrice">
+	<META NAME="CHANGED" CONTENT="20180810;90400000000000">
+	<META NAME="AppVersion" CONTENT="16.0000">
+	<META NAME="Company" CONTENT="SopraSteria">
+	<META NAME="DocSecurity" CONTENT="0">
+	<META NAME="HyperlinksChanged" CONTENT="false">
+	<META NAME="LinksUpToDate" CONTENT="false">
+	<META NAME="ScaleCrop" CONTENT="false">
+	<META NAME="ShareDoc" CONTENT="false">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.98in }
+		P { margin-bottom: 0.08in; direction: ltr; line-height: 100%; widows: 2; orphans: 2 }
+		H1 { margin-bottom: 0in; direction: ltr; color: #2e74b5; line-height: 100%; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H1.western { font-family: "Calibri Light", serif; font-size: 16pt; font-weight: normal }
+		H1.cjk { font-size: 16pt; font-weight: normal }
+		H1.ctl { font-family: ; font-size: 16pt; font-weight: normal }
+		H2 { margin-top: 0.03in; margin-bottom: 0in; direction: ltr; color: #2e74b5; line-height: 100%; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H2.western { font-family: "Calibri Light", serif; font-size: 13pt; font-weight: normal }
+		H2.cjk { font-family: "Arial"; font-size: 13pt; font-weight: normal }
+		H2.ctl { font-family: ; font-size: 13pt; font-weight: normal }
+		A:link { color: #0563c1; so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="fr-FR" LINK="#0563c1" DIR="LTR">
+<OL>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">A savoir</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><U>Avant de débuter</U></P>
+<P STYLE="margin-bottom: 0in">Légende&nbsp;:</P>
+<P STYLE="margin-bottom: 0in">	[entre crochets] = argument à
+personnaliser</P>
+<P STYLE="margin-bottom: 0in">	<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>Police_console_verte</FONT></FONT></FONT><FONT COLOR="#00b050">
+</FONT>= commande à taper</P>
+<P STYLE="margin-bottom: 0in">	<FONT COLOR="#7030a0"><FONT FACE="Consolas, serif"><FONT SIZE=2>Police_console_violette</FONT></FONT></FONT><FONT COLOR="#7030a0">
+</FONT>= en mode texte (nano par exemple)</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Qu’est-ce que la supervision&nbsp;?</U></P>
+<IMG SRC="centreon_html_22cab508.png" NAME="Image 36" WIDTH=694 HEIGHT=358 BORDER=0>
+<P STYLE="margin-bottom: 0in"><BR>
+
+</P>
+<P STYLE="margin-bottom: 0in"><A NAME="_GoBack"></A><SPAN CLASS="sd-abs-pos" STYLE="position: absolute; top: 0in; left: 0.45in; width: 694px"></SPAN><BR>
+</P>
+
+</P>
+<P STYLE="margin-bottom: 0in"><U>Objectifs&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Installation sans ISO (dans le cas
+	d’une installation sur serveur dédié / Cloud MS Azure)</P>
+	<LI><P STYLE="margin-bottom: 0in">Surveillance des hôtes</P>
+	<LI><P STYLE="margin-bottom: 0in">Métrologie et historisation des
+	états</P>
+	<LI><P STYLE="margin-bottom: 0in">Transmission d’alertes par mail 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Cartographie</P>
+	<LI><P STYLE="margin-bottom: 0in">Sécurisation&nbsp;: SNMPv3, NRPE
+	via SSL/TLS, accès HTTPS</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Version Centreon&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Centreon-Web&nbsp;: 2.8.23</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Ports principaux&nbsp;du serveur de
+supervision :</U></P>
+<CENTER>
+	<TABLE WIDTH=538 CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=90>
+		<COL WIDTH=80>
+		<COL WIDTH=326>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">161 
+				</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">UDP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">SNMP (depuis Centreon)</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">162 
+				</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">UDP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">SNMPTRAP (depuis l’agent)</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">3306</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">MYSQL</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">5666 
+				</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">NRPE</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">5669 
+				</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">UDP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">BBDO = Transfert données
+				satellite</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=90 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">12489</P>
+			</TD>
+			<TD WIDTH=80 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">TCP</P>
+			</TD>
+			<TD WIDTH=326 STYLE="border: none; padding: 0in">
+				<P STYLE="margin-left: 0.25in">NSClient++</P>
+			</TD>
+		</TR>
+	</TABLE>
+</CENTER>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Ports principaux&nbsp;des serveurs
+supervisés :</U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<CENTER>
+	<TABLE WIDTH=454 CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=74>
+		<COL WIDTH=77>
+		<COL WIDTH=260>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>20</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>TCP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>FTP</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>22</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>TCP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>SSH (conseil : modifier le N°)</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>25</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>TCP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>SMTP</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>53</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>UDP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>DNS</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>80 
+				</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>TCP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>HTTP (à remplacer par https)</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>123</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>UDP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>NTP</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>443 
+				</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>TCP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>HTTP 
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=74 STYLE="border: none; padding: 0in">
+				<P>5669 
+				</P>
+			</TD>
+			<TD WIDTH=77 STYLE="border: none; padding: 0in">
+				<P>UDP</P>
+			</TD>
+			<TD WIDTH=260 STYLE="border: none; padding: 0in">
+				<P>BBDO = Transfert données satellite</P>
+			</TD>
+		</TR>
+	</TABLE>
+</CENTER>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Description&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Centreon-Clib est une librairie
+	commune, écrite en C/C++, pour certains modules de Centreon. C'est
+	un pré-requis nécessaire au fonctionnement de Centreon-Engine</P>
+	<LI><P STYLE="margin-bottom: 0in">Les Centreon Perl Connecteurs et
+	Centreon SSH connecteurs sont des modules optionnels améliorant la
+	vitesse d'exécution des plugins en scripts Perl et en SSH. Ils
+	nécessitent l'utilisation de Centreon Engine</P>
+	<LI><P STYLE="margin-bottom: 0in">Centreon-Engine est le moteur de
+	supervision qui supervise le système d’informations</P>
+	<LI><P STYLE="margin-bottom: 0in">Les  sondes ou plugins, sont des
+	programmes exécutables obligatoires pour faire fonctionner notre
+	supervision.</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">Les sondes sont
+localisées dans /usr/lib/nagios/plugins/</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Centreon-Broker SQL est chargé
+	d’insérer les données de supervision en base de données et de
+	transmettre les données de performances à Centreon Broker RRD qui
+	est chargé de générer les fichiers RRD servant à générer les
+	graphiques de performances</P>
+	<LI><P STYLE="margin-bottom: 0in">Le protocole SNMP permet aux
+	administrateurs réseau de gérer les équipements du réseau et de
+	diagnostiquer les problèmes de réseau</P>
+	<LI><P STYLE="margin-bottom: 0in">Snmptrapd est le service
+	permettant de récupérer les traps SNMP envoyés par les
+	équipements.</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">Les traps SNMP sont
+des informations envoyées en utilisant le protocole SNMP depuis un
+équipement supervisé vers un serveur de supervision (satellite).
+Ces informations contiennent plusieurs attributs dont :</P>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">Adresse de l’équipement qui a
+		envoyé l’information</P>
+		<LI><P STYLE="margin-bottom: 0in">L’OID racine (Object
+		Identifier) correspond à l’identifiant du message reçu</P>
+		<LI><P STYLE="margin-bottom: 0in">Le message envoyé au travers du
+		trap SNMP qui correspond à un ensemble de paramètres</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Les mibs&nbsp;: afin de pouvoir
+	interpréter l’évènement reçu, le serveur de supervision doit
+	posséder dans sa configuration le nécessaire pour traduire
+	l’évènement. Pour cela, il doit disposer d’une base de données
+	contenant les OID ainsi que leurs descriptions, c’est ce qu’on
+	appelle les fichiers MIB. Il existe deux types de MIB :</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">Les MIB standards qui utilisent
+		des OID standardisés et qui sont implémentés par de nombreux
+		constructeurs sur leurs équipements</P>
+		<LI><P STYLE="margin-bottom: 0in">Les MIB constructeurs qui sont
+		propres à chacun et souvent à chaque modèle d’équipement</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Mysql&nbsp;: plusieurs bases de
+	données MySQL sont chargées de stocker la configuration de
+	Centreon, les informations de supervision ainsi que les données de
+	performances</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Apache&nbsp;: le serveur Apache
+	est chargé d’héberger l’interface web de Centreon.</P>
+</UL>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Centreon-web&nbsp;est l’interface
+	web de Centreon</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Références&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Prérequis&nbsp;: 
+	</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">https://documentation-fr.centreon.com/docs/centreon/en/2.8.x/installation/prerequisites.html</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Ports&nbsp;: 
+	</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">https://documentation-fr.centreon.com/docs/centreon/fr/2.8.x/installation/architecture/network.html</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Installation via paquets&nbsp;: 
+	</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">https://documentation-fr.centreon.com/docs/centreon/en/2.8.x/installation/from_packages.html</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Installation via ISO&nbsp;: 
+	</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">https://documentation-fr.centreon.com/docs/centreon/fr/latest/installation/from_iso.html</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Configuration Centreon-Web : 
+	</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">http://sugarbug.fr/atelier/installations/ces/installation-centreon3_46-centOS7/</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Installation Centreon IMP : 
+	</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">http://sugarbug.fr/atelier/installations/ces/installation-centreon3_4/centreon_imp/</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Installation de Nagvis&nbsp;:</P>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">https://www.sugarbug.fr/atelier/techniques/ihmweb/cartographie_supervision/centreon-web28x_nagvis-19x/</P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">https://documentation.centreon.com/docs/centreon-nagvis/en/latest/Install/Nagvis_backend.html</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Clapi&nbsp;:
+	http://www.sugarbug.fr/atelier/techniques/ihmweb/centreon/clapi/</P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in; line-height: 107%"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Illustration&nbsp;:</U></P>
+<IMG SRC="centreon_html_3ba1c14d.png" NAME="Image 52" WIDTH=624 HEIGHT=560 BORDER=0>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><SPAN CLASS="sd-abs-pos" STYLE="position: absolute; top: 0.19in; left: 0.34in; width: 624px"></SPAN><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Prérequis / Architecture&nbsp;:</U></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">OS&nbsp;:</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">CentOS 7 minimal</P>
+	</UL>
+	<LI><P STYLE="margin-bottom: 0in">Matériel&nbsp;:</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">Test	(&lt; 50 hôtes)&nbsp;		: 1
+		vCPU / 1 Go mémoire / 10 Go disque</P>
+		<LI><P STYLE="margin-bottom: 0in">Prod	(500 – 2000 hôtes)&nbsp;	:
+		2 vCPU / 2 Go mémoire / 20 Go disque</P>
+	</UL>
+</UL>
+
+
+
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=2>
+	<LI><H1 CLASS="western">Mise à jour du serveur</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">yum
+install nano wget mlocate traceroute -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+update –y</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=3>
+	<LI><H1 CLASS="western" STYLE="margin-top: 0in">Installation du
+	serveur central Centreon&nbsp;:</H1>
+</OL>
+<H2 CLASS="western" STYLE="margin-top: 0in">Installation en ligne de
+commande</H2>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Désactivation de SELinux</U></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/selinux/config</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in">Modifier :		<FONT COLOR="#7030a0">SELINUX=disabled</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Redémarrage machine&nbsp;: 
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>reboot</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Installation des dépôts</U></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nl-NL">cd
+/root</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nl-NL">wget
+http://yum.centreon.com/standard/3.4/el7/stable/noarch/RPMS/centreon-release-3.4-4.el7.centos.noarch.rpm</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nl-NL">yum
+install --nogpgcheck centreon-release-3.4-4.el7.centos.noarch.rpm</SPAN></FONT></FONT></FONT></P>
+<P LANG="nl-NL" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="nl-NL" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="nl-NL"><U>Installation du
+serveur central</U></SPAN></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install centreon-base-config-centreon-engine centreon</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Installer MySQL sur le même serveur</U></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install MariaDB-server -y</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Fuseau horaire PHP</U></P>
+<P STYLE="margin-bottom: 0in">Création d’un nouveau fichier :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/php.d/php-timezone.ini</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in">		<FONT COLOR="#7030a0">date.timezone =
+Europe/Paris</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+httpd restart</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Désactivation du pare-feu</U></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>systemctl
+stop firewalld</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">systemctl
+disable firewalld</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">systemctl
+status firewalld</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Penser à le réactiver à la fin des
+installations</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Base de données MySQL</U></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>mkdir
+-p  /etc/systemd/system/mariadb.service.d/</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>echo
+-ne &quot;[Service]\nLimitNOFILE=32000\n&quot; | tee
+etc/systemd/system/mariadb.service.d/limits.conf</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">systemctl
+daemon-reload</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">service
+mysqld start</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><SPAN LANG="en-US">Redémarrer
+la machine : </SPAN></FONT><FONT COLOR="#00b050"><SPAN LANG="en-US">reboot</SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">yum
+-y install net-snmp net-snmp-utils</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cp
+/etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.old</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><U>Activer le
+lancement automatique de services au démarrage</U></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">systemctl
+enable httpd.service</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">systemctl
+enable snmpd.service</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>systemctl
+enable mysql.service</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+httpd restart</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Pas effectué&nbsp;: Sécurisation de
+la base donnée&nbsp;:</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>mysqladmin
+-u root password 'azerty'</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Configuration Via l’interface web</U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Se connecter sur http://[adresse IP du
+serveur Centreon]/centreon</P>
+<P STYLE="margin-bottom: 0in">Identifiant&nbsp;: 	admin</P>
+<P STYLE="margin-bottom: 0in">Mot de passe&nbsp;: 	admin</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><IMG SRC="centreon_html_e2a0a2db.png" NAME="Image 240" ALIGN=BOTTOM WIDTH=178 HEIGHT=133 BORDER=0></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Mise à jour de l’interface web</U></P>
+<P STYLE="margin-bottom: 0in">Sur l'interface de Centreon,
+sélectionnez : 
+</P>
+<P STYLE="margin-bottom: 0in">1. « Configuration » en haut à
+droite</P>
+<P STYLE="margin-bottom: 0in">2. «  Pollers » juste en dessous</P>
+<P STYLE="margin-bottom: 0in">3. « Apply configuration » :</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><IMG SRC="centreon_html_eb7f33e9.png" NAME="Image 25" ALIGN=BOTTOM WIDTH=605 HEIGHT=193 BORDER=0></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Toujours sur l’interface web :</P>
+<P STYLE="margin-bottom: 0in">1. sélectionner « Central », dans le
+rectangle nommé  « Pollers »</P>
+<P STYLE="margin-bottom: 0in">2. cocher les quatre premières cases à
+gauche en dessous d’ « Actions »</P>
+<P STYLE="margin-bottom: 0in">3. choisir la méthode « Restart » 
+</P>
+<P STYLE="margin-bottom: 0in">4. finalement cliquer sur « Export »</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><IMG SRC="centreon_html_258479f0.png" NAME="Image 1" ALIGN=BOTTOM WIDTH=605 HEIGHT=156 BORDER=0></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Le résultat attendu :</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><IMG SRC="centreon_html_c443b274.png" NAME="Image 11" ALIGN=BOTTOM WIDTH=605 HEIGHT=84 BORDER=0></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=4>
+	<LI><H1 CLASS="western"><A NAME="_Toc497208878"></A>Les menus de
+	Centreon-Web</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+	<FONT FACE="Liberation Serif, serif"><FONT SIZE=3>Home : l’accueil</FONT></FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><IMG SRC="centreon_html_8a5cdf1.png" NAME="Image 247" ALIGN=BOTTOM WIDTH=605 HEIGHT=133 BORDER=0></P>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+	<FONT FACE="Liberation Serif, serif"><FONT SIZE=3>Monitoring : état
+	de la supervision</FONT></FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><IMG SRC="centreon_html_a128f122.png" NAME="Image 272" ALIGN=BOTTOM WIDTH=605 HEIGHT=141 BORDER=0></P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+	<FONT FACE="Liberation Serif, serif"><FONT SIZE=3>Reporting&nbsp;:
+	disponibilité des greffons</FONT></FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><IMG SRC="centreon_html_118a669c.png" NAME="Image 270" ALIGN=BOTTOM WIDTH=605 HEIGHT=141 BORDER=0></P>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+	<FONT FACE="Liberation Serif, serif"><FONT SIZE=3>Configuration :
+	ajout / configuration des hôtes, greffons, commandes ...</FONT></FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><IMG SRC="centreon_html_3e384b9.png" NAME="Image 271" ALIGN=BOTTOM WIDTH=605 HEIGHT=135 BORDER=0></P>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+	<FONT FACE="Liberation Serif, serif"><FONT SIZE=3>Administration :
+	configuration de Centreon</FONT></FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><IMG SRC="centreon_html_5d676f81.png" NAME="Image 273" ALIGN=BOTTOM WIDTH=605 HEIGHT=142 BORDER=0></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Si le message d’erreur suivant
+apparaît : «&nbsp;Add innodb_file_per_table=1 in my.cnf file under
+the [mysqld] section and restart MySQL Server&nbsp;», création d’un
+nouveau fichier :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/my.cnf</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">[mysqld]</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">innodb_file_per_table=1</FONT></P>
+<P STYLE="margin-bottom: 0in">service mysql restart</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Langue française</U></P>
+<P STYLE="margin-bottom: 0in">Installation de la langue française :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+-y install centreon-lang-fr_FR</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><U>Redémarrer
+les services</U></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+cbd start</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+centengine start</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+centcore start</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+service snmpd restart</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install centreon-pp-manager</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>chmod
++x  /usr/lib/nagios/plugins/check_icmp</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=5>
+	<LI><H1 CLASS="western">Installation SNMPv3</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install net-snmp net-snmp-libs net-snmp-utils -y</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install -y snmpcheck net-snmp-devel</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Arrêt snmp </U>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+service snmpd stop</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Modification snmpd.conf</U></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/snmp/snmpd.conf :</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ </FONT><FONT COLOR="#7030a0"><SPAN LANG="en-US"># Basic SNMP
+Community Information</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US"># Note Source IPs. Enter in your own IPs that
+will be allowed to communicate with the service.</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US"># It is recommended to allow localhost so you can
+run tests with snmpwalk.</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US"># Otherwise omit localhost if it is not needed.</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US"># You can list allowed subnets if you wish.
+Example below.</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">#</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">#           Community.Name  Source.IP.Allowed</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">rocommunity public          127.0.0.1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.49in; text-indent: 0.49in; margin-bottom: 0in">
+<FONT COLOR="#7030a0">  <SPAN LANG="en-US">rocommunity public        
+ </SPAN></FONT><FONT COLOR="#7030a0"><SPAN LANG="en-US"><B>[adresse
+IP privée]</B></SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ </FONT><FONT COLOR="#7030a0">rocommunity public          </FONT><FONT COLOR="#7030a0"><B>[adresse
+IP publique]</B></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ </FONT>
+</P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ rocommunity public          </FONT><FONT COLOR="#7030a0"><B>[adresse
+réseau/24]</B></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ # Optional location information</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ syslocation </FONT><FONT COLOR="#7030a0"><B>[ville / localisation]</B></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ # Optional contact information</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ syscontact Super User </FONT><FONT COLOR="#7030a0"><B>[adresse mail]</B></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ # SNMP v3 User Information</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Création du l’utilisateur snmpv3
+des mots de passe</U></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>net-snmp-create-v3-user
+-ro -A <B>[mot de passe SHA]</B>  -a SHA -X <B>[mot de passe AES]</B>
+-x AES <B>[nom utilisateur snmpv3]</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<TABLE WIDTH=697 CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=118>
+	<COL WIDTH=265>
+	<COL WIDTH=272>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><B>Parameter</B></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><B>Command
+			Line Flag</B></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><B>snmp.conf
+			token</B></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">securityName</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">-u&nbsp;</FONT></FONT><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><I>NAME</I></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">defSecurityName
+			NAME</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">authProtocol</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">-a&nbsp;</FONT></FONT><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><I>(MD5|SHA)</I></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">defAuthType
+			(MD5|SHA)</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">privProtocol</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">-x&nbsp;</FONT></FONT><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><I>(AES|DES)</I></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">defPrivType
+			DES</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">authKey</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">-A&nbsp;</FONT></FONT><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><I>PASSPHRASE</I></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">defAuthPassphrase
+			PASSPHRASE</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">privKey</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">-X&nbsp;</FONT></FONT><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><I>PASSPHRASE</I></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">defPrivPassphrase
+			PASSPHRASE</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">securityLevel</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">-l&nbsp;</FONT></FONT><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><I>(noAuthNoPriv|authNoPriv|authPriv)</I></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">defSecurityLevel
+			(noAuthNoPriv|authNoPriv|authPriv)</FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=118 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">context</FONT></FONT></P>
+		</TD>
+		<TD WIDTH=265 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">-n&nbsp;</FONT></FONT><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif"><I>CONTEXTNAME</I></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=272 STYLE="border: none; padding: 0in">
+			<P><FONT COLOR="#333333"><FONT FACE="Calibri Light, serif">defContext
+			CONTEXTNAME</FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install epel-release -y</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">yum
+install perl-Crypt-Rijndael -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+service snmpd start</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">TEST snmpv3 en local
+:</SPAN></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>snmpwalk
+-v 3 -u <B>[nom utilisateur snmpv3]</B> -a SHA -A <B>[mot de passe
+SHA]</B>  -x AES -X &quot;<B>[mot de passe AES]</B>&quot; -l authPriv
+127.0.0.1</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">TEST snmpv3 via une sonde en local&nbsp;:</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>/usr/lib/nagios/plugins/check_centreon_snmp_cpu
+-H 127.0.0.1 -v 3 -u <B>[nom utilisateur snmpv3]</B> -p '<B>[mot de
+passe SHA]</B>' --authprotocol SHA --privpassword '<B>[mot de passe
+AES]</B>' --privprotocol AES -w 80 -c 90</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=6>
+	<LI><H1 CLASS="western">Installation NRPE</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install yum-utils</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>rpm
+-Uvh --nodeps $(repoquery --location nagios-plugins-perl)</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+update</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>rpm
+-Uvh --nodeps $(repoquery --location centreon-plugins)</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install nrpe nagios-plugins-users nagios-plugins-load
+nagios-plugins-swap nagios-plugins-disk nagios-plugins-procs</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Ajout d’une ligne dans services&nbsp;:</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/services</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">		nrpe 		  
+5666/tcp</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>rpm
+-Uvh
+http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+--enablerepo=epel -y install nrpe nagios-plugins</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">yum
+--enablerepo=epel -y list nagios-plugins*</SPAN></FONT></FONT></FONT></P>
+<P LANG="es-ES" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="es-ES" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Configurer et autoriser l’accès
+au serveur NRPE</U></P>
+<P STYLE="margin-bottom: 0in">Modifier nrpe.cfg :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/nagios/nrpe.cfg</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">allowed_hosts=127.0.0.1,</FONT><FONT COLOR="#7030a0"><B>[adresse
+IP publique]</B></FONT><FONT COLOR="#7030a0">,</FONT><FONT COLOR="#7030a0"><B>
+[adresse du serveur centreon],</B></FONT><FONT COLOR="#7030a0">::1</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">dont_blame_nrpe=1</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Ajout de nouvelles lignes (à la fin)
+dans nrpe.cfg</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/nagios/nrpe.cfg</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">#Matériel</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">command[check_raid]=/usr/lib/nagios/plugins/check_raid.pl
+--plugin mdstat</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">command[check_dd]=/usr/lib/nagios/plugins/multi_check
+-f /usr/lib/nagios/plugins/disque.cmd</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">command[check_diskstat.sh]=/usr/lib/nagios/plugins/check_diskstat.sh
+ -d sda -W 50 -C 100</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_all_disks]=/usr/lib/nagios/plugins/check_disk
+-w 20 -c 10</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_ide_smart]=/usr/lib/nagios/plugins/check_ide_smart
+-n -d /dev/sda</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_smart_attributes]=/usr/lib/nagios/plugins/check_smart_attributes
+--drive=/dev/sda</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_smartmon]=
+sudo /usr/lib/nagios/plugins/check_smartmon --device=/dev/sda</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">#OS</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_version]=/usr/lib/nagios/plugins/check_version</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apt]=/usr/lib/nagios/plugins/check_apt</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">command[check_version2]=/usr/lib/nagios/plugins/check_version2</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">#Réseau</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">command[check_traffic]=/usr/lib/nagios/plugins/check_iftraffic64.pl
+-H 127.0.0.1 -C public -i 2 -B -b 1000 -u m --32bit</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><B>command[check_centreon_plugins_interfaces]=/usr/lib/nagios/plugins/centreon_plugins.pl
+--plugin=os::linux::snmp::plugin --mode=interfaces
+--hostname=127.0.0.1 --snmp-$</B></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">#Service_apache</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apache2.sh]=/usr/lib/nagios/plugins/check_apache2.sh</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apache2.py]=/usr/lib/nagios/plugins/check_apache2.py</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apache_status]=/usr/lib/nagios/plugins/check_apache_status</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apache_status-b]=/usr/lib/nagios/plugins/check_apache_status-b</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apache_access.pl]=/usr/lib/nagios/plugins/check_apache_access.pl</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apachestatus.pl]=/usr/lib/nagios/plugins/check_apachestatus.pl</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_apache_serverstatus.pl]=/usr/lib/nagios/plugins/check_apache_serverstatus.pl</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_service_apache2]=/usr/lib/nagios/plugins/check_process.pl
+-n apache2</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">#Système</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_load]=/usr/lib/nagios/plugins/check_load
+-w 3,3,3 -c 5,5,5</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_users]=/usr/lib/nagios/plugins/check_users
+-w 5 -c 10</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs
+-w 5 -c 10 -s Z</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_total_procs]=/usr/lib/nagios/plugins/check_procs
+-w 450 -c 600</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_swap]=/usr/lib/nagios/plugins/check_swap
+-w 30 -c 10</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_home]=/usr/lib/nagios/plugins/check_home</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_lastuser]=/usr/lib/nagios/plugins/check_lastuser</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_centreon_plugins_partitions]=/usr/lib/nagios/plugins/centreon_plugins.pl
+--plugin=os::linux::local::plugin --mode=list-partitions
+--filter-name sda*</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_centreon_plugins_uptime]=/usr/lib/nagios/plugins/centreon_plugins.pl
+ --plugin=os::linux::local::plugin --mode=uptime --hostname 127.0.0.1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_centreon_plugins_connexion]=/usr/lib/nagios/plugins/centreon_plugins.pl
+--plugin=os::linux::local::plugin --mode=connections
+--service=&quot;ssh,,,22,,,,10,2$</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_centreon_plugins_cpu_details]=/usr/lib/nagios/plugins/centreon_plugins.pl
+--plugin=os::linux::local::plugin --mode=cpu-detailed --hostname
+127.0.0.1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_centreon_plugins_memoire]=/usr/lib/nagios/plugins/centreon_plugins.pl
+--plugin=os::linux::local::plugin --mode=memory</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_centreon_plugins_storage]=/usr/lib/nagios/plugins/centreon_plugins.pl
+--plugin=os::linux::snmp::plugin --mode=storage --name --regexp
+--storage=/var  --$</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_tcp22]=/usr/lib/nagios/plugins/check_tcp
+-p 22</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_tcp80]=/usr/lib/nagios/plugins/check_tcp
+-p 80</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">command[check_tcp443]=/usr/lib/nagios/plugins/check_tcp
+-p 443</SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cp
+/usr/local/nagios/libexec/check_nrpe /usr/lib/nagios/plugins/</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">systemctl
+restart nrpe</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">systemctl
+enable nrpe</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">TEST nrpe en local :</SPAN></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">/usr/lib/nagios/plugins/check_nrpe
+-H 127.0.0.1</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">TEST nrpe via une sonde en local :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>/usr/lib/nagios/plugins/check_nrpe
+-H 127.0.0.1 -c check_apt</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Troubleshooting NRPE</U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Vérifier l’état de NRPE :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+nrpe status</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Vérifier que le port 5666 de NRPE est
+bien ouvert :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nb-NO">netstat
+-an | grep 5666</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nb-NO">netstat
+-at | egrep &quot;nrpe|5666&quot; </SPAN></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nb-NO">cat
+/etc/services | grep 5666</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="nb-NO">netstat
+-l -n  | grep 5666</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>ps
+aux | grep nrpe</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Erreur&nbsp;: «&nbsp;Can't locate
+	utils.pm in @INC (@INC contains: ....&nbsp;»</P>
+</UL>
+<P STYLE="margin-left: 0.49in; margin-bottom: 0in">Copier le fichier
+«&nbsp;utils.pm&nbsp;» dans le répertoire des sondes</P>
+<P STYLE="margin-left: 0.49in; margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cp
+/usr/lib64/nagios/plugins/utils.pm /usr/lib/nagios/plugins</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">Erreur &quot;NRPE:
+	Command timed out after x seconds&quot; ou “Connection refused or
+	timed out&quot;</SPAN></P>
+</UL>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">La commande lancée n’a pas
+		terminé son exécution dans le temps défini, il faut par
+		conséquent augmenter le delai dans le fichier de configuration de
+		NRPE&nbsp;: «&nbsp;command_timeout variable&nbsp;».</P>
+		<LI><P STYLE="margin-bottom: 0in">le parefeu</P>
+		<LI><P STYLE="margin-bottom: 0in">l’adresse du serveur n’est
+		pas indiquée dans le fichier de configuration de l’agent
+		«allowed host ...&nbsp;»</P>
+		<LI><P STYLE="margin-bottom: 0in">Si xinetd est utilisée,
+		l’adresse du serveur n’est pas indiquée dans le fichier de
+		configuration de l’agent «only_from ... »</P>
+		<LI><P STYLE="margin-bottom: 0in">le démon NRPE n’est pas
+		installé, ou démarré, ou si oubli de le redémarrer après
+		modifications</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">&quot;CHECK_NRPE:
+	Received 0 bytes from daemon. Check the remote server logs for an
+	error message.&quot;&nbsp;:</SPAN></P>
+</UL>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">il faut vérifier dans les logs
+		pour savoir de quoi il s’agit</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">The check_nrpe
+	plugin was unable to complete an SSL handshake with the NRPE daemon
+	:</SPAN></P>
+</UL>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">lié à la version d’Openssl
+		installée sur l’agent, et sans doute des problèmes de
+		compatibilité</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">&quot;NRPE:
+	Unable to read output&quot; :</SPAN></P>
+</UL>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">le chemin du greffon est
+		incorrect</P>
+		<LI><P STYLE="margin-bottom: 0in">le greffon ne fonctionne pas
+		correctement</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">&quot;NRPE:
+	Command 'x' not defined&quot; :</SPAN></P>
+</UL>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">la commande ‘x’ n’a pas été
+		définie correctement dans le fichier de configuration de NRPE de
+		l’agent.</P>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in; widows: 0; orphans: 0"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">&quot;CHECK_NRPE:
+	Socket timeout after 10 seconds&quot; :</SPAN></P>
+</UL>
+<P STYLE="margin-left: 0.75in; margin-bottom: 0in; widows: 0; orphans: 0">
+<IMG SRC="centreon_html_a0920519.png" NAME="Image 351" ALIGN=BOTTOM WIDTH=236 HEIGHT=21 BORDER=0></P>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">La sonde n’a pas eu le temps
+		nécessaire de récupérer l’info -&gt; ajouter en commentaire
+		une durée d’exécution plus longue (par exemple à la fin du
+		check lancé «&nbsp;-t 20»&nbsp;pour 20 secondes )</P>
+	</UL>
+</UL>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">CHECK_NRPE:
+	Error - Could not connect to 192.168.30.2: Connection reset by peer</SPAN></P>
+</UL>
+<P STYLE="margin-left: 0.24in; margin-bottom: 0in; widows: 0; orphans: 0">
+<B>OU</B></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">connect to
+	address 192.168.30.2 port 5666: Connection refused</SPAN></P>
+</UL>
+<UL>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">Vérifier que xinetd.d est
+		utilisé :</P>
+	</UL>
+</UL>
+<UL>
+	<UL>
+		<UL>
+			<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+			<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>ls
+			-la /etc/xinetd.d/nrpe</FONT></FONT></FONT></P>
+			<UL>
+				<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+				Si résultat = “/etc/xinetd.d/nrpe” =&gt; xinetd.d est
+				utilisé</P>
+				<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+				Si résultat = “No such file or directory” =&gt; xinetd.d
+				n’est pas utilisé</P>
+			</UL>
+			<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%; widows: 0; orphans: 0">
+			Si xinetd.d est utilisé, il faut vérifier la configuration : 
+			</P>
+		</UL>
+	</UL>
+</UL>
+<P STYLE="margin-left: 1.5in; margin-bottom: 0in; widows: 0; orphans: 0">
+<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/xinetd.d/nrpe</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 1.5in; margin-bottom: 0in; widows: 0; orphans: 0">
+<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/usr/local/nagios/etc/nrpe.cfg</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 1.5in; margin-bottom: 0in; widows: 0; orphans: 0">
+<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="es-ES">nano
+/usr/local/nagios/etc/nrpe/common.cfg</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 1.5in; margin-bottom: 0in; widows: 0; orphans: 0">
+<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+nagios-nrpe-server restart</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 1.5in; margin-bottom: 0in; widows: 0; orphans: 0">
+<FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+xinetd restart</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=7>
+	<LI><H1 CLASS="western">Règles du parefeu</H1>
+</OL>
+<P STYLE="margin-bottom: 0in">Modification des règles du pare-feu&nbsp;:</P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>iptables
+-A INPUT -s [adresse_source] -p udp  --dport 161 -j ACCEPT</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>iptables
+-A INPUT -s [adresse_source] -p tcp  --dport 5666 -j ACCEPT</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>iptables
+-A INPUT -s [adresse_source] -p udp  --dport 161 -j ACCEPT</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>iptables
+-A INPUT -s [adresse_source] -p tcp  --dport 5666 -j ACCEPT</FONT></FONT></FONT></P>
+<OL START=8>
+	<LI><H1 CLASS="western">Clapi</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Clapi est installé de base</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Commande (tout en un) pour appliquer
+les nouvelles modifications et redémarrer le moteur de supervision&nbsp;:</P>
+<P STYLE="margin-bottom: 0in">centreon -u admin -p [mot de passe
+centreon] -a APPLYCFG -v 1</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Redémarrer le moniteur de
+supervision&nbsp;:</P>
+<P STYLE="margin-bottom: 0in">centreon -u admin -p [mot de passe
+centreon] -a POLLERRESTART -v 1</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Pour exporter une configuration via
+Clapi&nbsp;:</P>
+<P STYLE="margin-bottom: 0in">centreon -u admin -p [mot de passe
+centreon] -er [nom fichier à créer contenant la configuration
+clapi]</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Pour importer une configuration via
+Clapi&nbsp;:</P>
+<P STYLE="margin-bottom: 0in">centreon -u admin -p [mot de passe
+centreon] -i [fichier contenant une ancienne configuration clapi]</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=9>
+	<LI><H1 CLASS="western">Notifications par mail via Gmail</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install postfix mailx cyrus-sasl-plain -y</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>echo
+&quot;smtp.gmail.com    <B>[adresse mail en @gmail.com]</B>:<B>[mot
+de passe accès Gmail]</B>&quot; &gt; /etc/postfix/sasl_passwd</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>chmod
+400 /etc/postfix/sasl_passwd</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Modifier main.cf&nbsp;:</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/postfix/main.cf</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">		relayhost =
+[smtp.gmail.com]:587</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Ajouter à la fin de main.cf&nbsp;:</P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">smtp_sasl_auth_enable
+= yes</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">smtp_sasl_password_maps
+= hash:/etc/postfix/sasl_passwd</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">smtp_sasl_security_options
+= noanonymous</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">#
+Secure channel TLS with exact nexthop name match.</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">smtp_tls_security_level
+= secure</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">smtp_tls_mandatory_protocols
+= TLSv1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">smtp_tls_mandatory_ciphers
+= high</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">smtp_tls_secure_cert_match
+= nexthop</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">smtp_tls_CAfile
+= /etc/pki/tls/certs/ca-bundle.crt</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>postmap
+/etc/postfix/sasl_passwd</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+postfix restart</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Test d’envoi de mail : 
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>echo
+&quot;Test d alerte de postfix&quot; | mail -s &quot;tentative envoi
+d alerte depuis Centreon&quot; <B>[adresse mail]</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=10>
+	<LI><H1 CLASS="western">Accès https sur Centreon-Web</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install mod_ssl openssl</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">openssl
+genrsa -out ca.key 1024</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">openssl
+req -new -key ca.key -out ca.csr</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">Exemple :	</SPAN><FONT COLOR="#7030a0"><SPAN LANG="en-US">
+   Country Name (2 letter code) [XX]:FR</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">State or Province Name (full name) []:Paris</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">Locality Name (eg, city) [Default City]:Paris</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">Organization Name (eg, company) [Default
+Company Ltd]:Ac-Corp</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">Organizational Unit Name (eg, section) []:DSI</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">Common Name (eg, your name or your server's
+hostname) []:supervision.ac-corp.site</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">Email Address []:</SPAN></FONT><FONT COLOR="#7030a0"><SPAN LANG="en-US"><B>[adresse
+mail]</B></SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">openssl
+x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cp
+ca.crt /etc/pki/tls/certs</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cp
+ca.key /etc/pki/tls/private/ca.key</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cp
+ca.csr /etc/pki/tls/private/ca.csr</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="it-IT">nano
+/etc/httpd/conf.d/10-centreon.conf</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in">Mettre à la fin<FONT COLOR="#7030a0">	&lt;VirtualHost
+*:443&gt;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">SSLEngine
+on</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">SSLCertificateFile
+/etc/pki/tls/certs/ca.crt</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">SSLCertificateKeyFile
+/etc/pki/tls/private/ca.key</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">&lt;Directory
+/usr/share/centreon/www &gt;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">AllowOverride
+All</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">&lt;/Directory&gt;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">&lt;/VirtualHost&gt;</SPAN></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">service
+httpd restart</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=11>
+	<LI><H1 CLASS="western">Installation de Nagvis</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>yum
+install graphviz wget git -y</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>cd
+/usr/local/src</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">wget
+http://www.nagvis.org/share/nagvis-1.9.8.tar.gz</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">tar
+xzf nagvis-1.9.8.tar.gz</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">cd
+nagvis-1.9.8</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="da-DK">./install.sh
+-q -n /usr/sbin -p /usr/share/nagvis -u apache -g apache -w
+/etc/httpd/conf.d -a y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">service
+httpd reload</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cd
+/usr/local/src</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">git
+clone https://github.com/centreon/centreon-nagvis-backend.git</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mv
+centreon-nagvis-backend/GlobalBackendcentreonbroker.php
+/usr/share/nagvis/share/server/core/classes/</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">chown
+apache:
+/usr/share/nagvis/share/server/core/classes/GlobalBackendcentreonbroker.php</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">chmod
+664
+/usr/share/nagvis/share/server/core/classes/GlobalBackendcentreonbroker.php</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">nano
+/usr/share/nagvis/share/server/core/classes/GlobalBackendcentreonbroker.php</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">remplacer :	</SPAN><FONT COLOR="#7030a0"><SPAN LANG="en-US">if
+($row['has_been_checked'] == '0' || $row['current_state'] == '') {</SPAN></FONT></P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">par : 		</SPAN><FONT COLOR="#7030a0"><SPAN LANG="en-US">if
+(isset($e) &amp;&amp; $row['has_been_checked'] == '0' ||
+$row['current_state'] == '') {</SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">mv
+/usr/share/nagvis/etc/nagvis.ini.php
+/usr/share/nagvis/etc/nagvis.ini.php.old</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US">Création d’un
+nouveau fichier :</SPAN></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">nano
+/usr/share/nagvis/etc/nagvis.ini.php</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[global]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">authmodule=&quot;CoreAuthModSQLite&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">authorisationmodule=&quot;CoreAuthorisationModSQLite&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">dateformat=&quot;Y-m-d
+H:i:s&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">file_group=&quot;apache&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">file_mode=&quot;660&quot;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">language_detection=&quot;user,session,browser,config&quot;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">language=&quot;en_US&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">refreshtime=60</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">sesscookiedomain=&quot;auto-detect&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">sesscookiepath=&quot;/&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">sesscookieduration=&quot;86400&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">startmodule=&quot;Overview&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">startaction=&quot;view&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[paths]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">base=&quot;/usr/share/nagvis/&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">htmlbase=&quot;/nagvis&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">htmlcgi=&quot;/centreon&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[defaults]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">backend=&quot;centreonbroker&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">backgroundcolor=&quot;#ffffff&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">contextmenu=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">contexttemplate=&quot;default&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">event_on_load=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">event_repeat_interval=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">event_repeat_duration=-1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">eventbackground=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">eventhighlight=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">eventhighlightduration=30000</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">eventhighlightinterval=500</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">eventlog=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">eventloghidden=&quot;1&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">eventscroll=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">headermenu=&quot;1&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">headertemplate=&quot;default&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hovermenu=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hovertemplate=&quot;default&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hoverdelay=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hoverchildsshow=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hoverchildslimit=&quot;10&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hoverchildsorder=&quot;asc&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hoverchildssort=&quot;s&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">icons=&quot;std_medium&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">onlyhardstates=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">recognizeservices=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">showinlists=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">showinmultisite=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">urltarget=&quot;_parent&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hosturl=&quot;[htmlcgi]/main.php?p=20201&amp;o=svc&amp;host_search=[host_name]&amp;search=&amp;poller=&amp;hostgroup=&amp;output_search=&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">hostgroupurl=</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">serviceurl=&quot;[htmlcgi]/main.php?p=20201&amp;o=svcd&amp;host_name=[host_name]&amp;service_description=[service_description]&amp;poller=&amp;hostgroup=&amp;output_search=&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">servicegroupurl=</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">mapurl=&quot;[htmlcgi]/main.php?p=243&amp;map=[map_name]&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">view_template=&quot;default&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">label_show=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[index]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">backgroundcolor=#ffffff</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">headermenu=&quot;1&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">headertemplate=&quot;default&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">showmaps=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">showrotations=1</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">showmapthumbs=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[automap]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[wui]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">maplocktime=5</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">grid_show=0</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">grid_color=&quot;#D5DCEF&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">grid_steps=32</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[worker]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">interval=10</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">updateobjectstates=30</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[backend_centreonbroker]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">backendtype=&quot;centreonbroker&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">statushost=&quot;&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">dbhost=&quot;localhost&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">dbport=3306</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">dbname=&quot;centreon_storage&quot;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">dbuser=&quot;centreon&quot;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">dbpass=&quot;</FONT><FONT COLOR="#7030a0"><B>[mot
+de passe base de donnée &gt; par défaut : centreon]</B></FONT><FONT COLOR="#7030a0">&quot;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">dbinstancename=&quot;default&quot;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">htmlcgi=&quot;/centreon&quot;</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">[states]</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Modification 11-nagvis.conf :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="it-IT">nano
+/etc/httpd/conf.d/11-nagvis.conf</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">#Alias
+/nagvis &quot;/usr/local/nagvis/share&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">Alias
+/nagvis &quot;/usr/share/nagvis/share&quot;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">#&lt;Directory
+&quot;/usr/local/nagvis/share&quot;&gt;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">&lt;Directory
+&quot;/usr/share/nagvis/share&quot;&gt;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">Options FollowSymLinks</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">AllowOverride All</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">Require all granted</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">#Order allow,deny</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">Allow from all</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">&lt;IfModule mod_rewrite.c&gt;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteEngine On</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteBase /nagvis</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteCond %{REQUEST_URI}
+^/nagvis/frontend/(wui|nagvis-js)</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteCond %{QUERY_STRING} map=(.*)</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteRule ^(.*)$
+/nagvis/frontend/nagvis-js/index.php?mod=Map&amp;act=v$</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteCond %{REQUEST_URI}
+^/nagvis/frontend(/wui)?/?(index.php)?$</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteRule ^(.*)$
+/nagvis/frontend/nagvis-js/index.php [R=301,L]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteCond %{REQUEST_URI}
+^/nagvis/frontend/nagvis-js</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteCond %{QUERY_STRING} !mod</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteCond %{QUERY_STRING} rotation=(.*)</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+   <SPAN LANG="en-US">RewriteRule ^(.*)$
+/nagvis/frontend/nagvis-js/index.php?mod=Rotation&amp;$</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+ <SPAN LANG="en-US">&lt;/IfModule&gt;</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">&lt;/Directory&gt;</SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Modification des alertes sonores de
+Nagvis :</P>
+<P STYLE="margin-bottom: 0in">Menu des alertes sonores&nbsp;dans
+Nagvis : configuration générale &gt; states &gt; unreachable_sound</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Répertoire contenant les fichiers mp3
+: 
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">cd
+/usr/share/nagvis/share/userfiles/sounds/</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=12>
+	<LI><H1 CLASS="western">Sécurisation du serveur</H1>
+</OL>
+<P STYLE="margin-bottom: 0in"><U>Sécurisation SSH</U></P>
+<P STYLE="margin-bottom: 0in">Modification des lignes dans
+sshd_config&nbsp;:</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/ssh/sshd_config</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">		Port 2222</FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0">		</FONT><FONT COLOR="#7030a0"><SPAN LANG="en-US">PermitRootLogin
+no</SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">service
+sshd restart</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">reboot</SPAN></FONT></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><U>Installation
+Fail2ban :</U></SPAN></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+yum install epel-release -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">yum
+install fail2ban -y</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">sudo
+systemctl enable fail2ban</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>chkconfig
+fail2ban on</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Création du fichier jail.local :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>nano
+/etc/fail2ban/jail.local</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">
+[DEFAULT]</FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0">ignoreip
+= 127.0.0.1 </FONT><FONT COLOR="#7030a0"><B>[adresse réseau local
+concerné / 24]</B></FONT><FONT COLOR="#7030a0"> </FONT><FONT COLOR="#7030a0"><B>[adresse
+IP des machines connectées]</B></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">bantime
+ = 3600</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">findtime
+ = 1800</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">maxretry
+= 5</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">[ssh-iptables]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">enabled
+ = true</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">filter
+  = sshd</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">action
+  = iptables[name=SSH, port=2222, protocol=tcp]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">logpath
+ = /var/log/secure</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">maxretry
+= 5</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">destemail
+= [adresse mail de l’administrateur]</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">sender
+= postmaster@email.net</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">sendername
+= Fail2Ban</SPAN></FONT></P>
+<P STYLE="margin-left: 0.98in; margin-bottom: 0in"><FONT COLOR="#7030a0"><SPAN LANG="en-US">mta
+= sendmail</SPAN></FONT></P>
+<P LANG="en-US" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2><SPAN LANG="en-US">service
+fail2ban start</SPAN></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>service
+fail2ban restart</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+fail2ban-client status</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>sudo
+fail2ban-client status sshd</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in">Description de la configuration de
+jail.local :</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><B>maxretry</B></FONT>
+= nombre de fois qu’un utilisateur peut réessayer de se connecter
+pendant une durée définie = <FONT COLOR="#7030a0"><B>findtime</B></FONT>
+avant d’être banni pour la durée = <FONT COLOR="#7030a0"><B>bantime</B></FONT>.</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><B>ignoreip
+</B></FONT>permet d’ajouter des adresses IP qui seront exclues des
+jails. Ensuite vient la partie de paramétrage des notifications par
+email. Mettre <FONT COLOR="#7030a0"><B>sendmail</B></FONT> pour
+Postfix.</P>
+<P STYLE="margin-bottom: 0in">La ligne action détermine le type
+d’action à entreprendre lors d’un bannissement. Par défaut elle
+est renseignée à&nbsp;:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"> <FONT COLOR="#7030a0"><B>%action_s</B></FONT>
+	qui signifie que l’IP est bannie sans notification. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><B>%action_mws</B></FONT><FONT COLOR="#7030a0">
+	</FONT>= envoie un email avec l’IP et le résultat du WHOIS</P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#7030a0"><B>%action_mwls</B></FONT><FONT COLOR="#7030a0">
+	</FONT>envoie un email avec l’IP, le résultat du WHOIS et les
+	lignes correspondantes dans les logs.</P>
+</UL>
+<P STYLE="margin-bottom: 0in">Ensuite il est possible d’ajouter des
+sections pour les jails, ici uniquement = <FONT COLOR="#7030a0"><B>[sshd]</B></FONT><FONT COLOR="#7030a0">
+</FONT>que l’on active avec enabled = true.</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U>Supprimer l’historique de
+l’ensemble des commandes précédemment tapées&nbsp;: </U>
+</P>
+<P STYLE="margin-bottom: 0in">Les commandes suivantes supprimera
+l’historique de tous les utilisateurs&nbsp;:</P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>history
+-c</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT COLOR="#00b050"><FONT FACE="Consolas, serif"><FONT SIZE=2>history
+-w</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+</BODY>
+</HTML>
